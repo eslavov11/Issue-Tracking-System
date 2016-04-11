@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.user', ['ngRoute'])
+angular.module('issueTrackingSystem.user', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/user', {
