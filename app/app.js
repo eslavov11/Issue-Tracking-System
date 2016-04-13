@@ -4,7 +4,8 @@
 angular.module('issueTrackingSystem', [
   'ngRoute',
   'issueTrackingSystem.view1',
-  'issueTrackingSystem.view2'
+  'issueTrackingSystem.view2',
+  'issueTrackingSystem.home'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/view1'});

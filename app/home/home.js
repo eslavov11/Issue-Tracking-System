@@ -4,11 +4,13 @@ angular.module('issueTrackingSystem.home', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/home', {
-            templateUrl: 'home/home.html',
+            templateUrl: 'app/home/home.html',
             controller: 'HomeController'
         });
     }])
 
-    .controller('HomeController', [function() {
-
+    .controller('HomeController', ['$scope', function($scope) {
+        $scope.logUser = function (user) {
+            console.log(user);
+        }
     }]);

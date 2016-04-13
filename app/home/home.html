@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<section>
+    <form name="login">
+        <div>
+            <label for="logUser">Username</label>
+            <input type="text" ng-model="userData.username" id="logUser" placeholder="Enter username..." />
+        </div>
+        <div>
+            <label for="logPassword">Password</label>
+            <input type="password" ng-model="userData.password" id="logPassword" placeholder="Enter password..." />
+        </div>
+        <button ng-click="logUser(userData)">Login</button>
+    </form>
+</section>
