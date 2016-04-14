@@ -16,12 +16,24 @@ angular.module('issueTrackingSystem.home', [
         'authentication',
         function($scope, authentication) {
             $scope.logUser = function (user) {
-                console.log(user);
-                authentication.loginUser(user);
+                authentication.loginUser(user)
+                    .then(function (loggedUser) {
+                        console.log(loggedUser);
+                    }, function (error) {
+                        alert('Login error ' + error);
+                        console.log(error);
+                    });
             };
 
             $scope.registerUser = function (user) {
-                console.log(user);
-                authentication.registerUser(user);
+                authentication.registerUser(user)
+                    .then(function (registeredUser) {
+                        console.log(5555);
+                        console.log(registeredUser);
+                        console.log(5555);
+                    }, function (error) {
+                        alert('Register error' + error);
+                        console.log(error);
+                    });
             };
     }]);
