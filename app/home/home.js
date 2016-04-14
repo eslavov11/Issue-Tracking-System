@@ -3,7 +3,6 @@
 angular.module('issueTrackingSystem.home', [
     'ngRoute',
     'issueTrackingSystem.users.authentication'])
-
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'app/home/home.html',
