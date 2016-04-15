@@ -35,8 +35,17 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return deferred.promise;
             }
 
-            function logoutUser() {
+            function logoutUser(access_token) {
+                var deferred = $q.defer();
 
+                $http.post(BASE_URL + 'Account/Logout', {})
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
             }
 
             return {

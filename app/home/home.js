@@ -19,6 +19,7 @@ angular.module('issueTrackingSystem.home', [
                 authentication.loginUser(user)
                     .then(function (loggedUser) {
                         sessionStorage.access_token = loggedUser.data.access_token;
+                        console.log(loggedUser.data.access_token);
                         sessionStorage.username = loggedUser.data.userName;
                         $window.location.href = '/';
                         console.log(loggedUser);
@@ -31,9 +32,12 @@ angular.module('issueTrackingSystem.home', [
             $scope.registerUser = function (user) {
                 authentication.registerUser(user)
                     .then(function (registeredUser) {
-                        console.log(5555);
-                        console.log(registeredUser);
-                        console.log(5555);
+                        var userData = {
+                            username: user.email,
+                            password: user.password
+                        }
+
+                        $scope.logUser(userData);
                     }, function (error) {
                         alert('Register error' + error);
                         console.log(error);
