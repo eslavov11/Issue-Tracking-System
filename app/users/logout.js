@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('issueTrackingSystem.users.logout', [
-        'ngRoute',
         'issueTrackingSystem.users.authentication'])
 
     .controller('LogoutController', [
@@ -9,7 +8,6 @@ angular.module('issueTrackingSystem.users.logout', [
         '$window',
         'authentication',
         function($scope, $window, authentication) {
-
             //TODO: call server
             authentication.logoutUser({access_token: sessionStorage.access_token})
                 .then(function () {

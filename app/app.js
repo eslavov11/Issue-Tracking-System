@@ -5,9 +5,11 @@ angular.module('issueTrackingSystem', [
   'ngRoute',
   'issueTrackingSystem.view1',
   'issueTrackingSystem.view2',
+  'issueTrackingSystem.navbar',
   'issueTrackingSystem.home',
   'issueTrackingSystem.dashboard',
-  'issueTrackingSystem.users.logout'
+  'issueTrackingSystem.users.logout',
+  'issueTrackingSystem.users.authentication'
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
