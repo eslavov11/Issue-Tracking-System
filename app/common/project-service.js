@@ -1,26 +1,37 @@
 'use strict';
 
-angular.module('issueTrackingSystem.dashboard', [
-        'ngRoute',
-        'issueTrackingSystem.users.authentication',
-        'issueTrackingSystem.common.issueService'])
+angular.module('issueTrackingSystem.common.issueService', [])
+    .factory('issueService', [
+        '$http',
+        '$q',
+        'BASE_URL',
+        function ($http, $q, BASE_URL) {
+            function getUserProjects(userAuth, params) {
+                var deferred = $q.defer();
 
-    .controller('DashboardController', [
-        '$scope',
-        '$window',
-        'authentication',
-        'issueService',
-        function($scope, $window, authentication, issueService) {
-            $scope.username = sessionStorage.username;
+                // TODO: test
+                params = params || {};
+                params.pageSize = 2;
+                params.pageNumber = 1;
+                params.orderBy = 'Project.Name desc, IssueKey';
+                // **********
 
-            issueService.getUserIssues(authentication.getAuthHeaders())
-                .then(function (issues) {
-                    console.log(issues);
+                $http.get(BASE_URL + 'issues/me?orderBy=' + params.orderBy +
+                        '&pageSize=' + params.pageSize +
+                        '&pageNumber=' + params.pageNumber,
+                    userAuth)
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
 
-                    $scope.issues = JSON.stringify(issues.data.Issues);
-                }, function (error) {
-                    console.log(error);
-                })
+                return deferred.promise;
+            }
+
+            return {
+                getUserIssues: getUserIssues
+            }
         }]);
 
 //
@@ -43,5 +54,3 @@ angular.module('issueTrackingSystem.dashboard', [
 //o	pageSize (Int, Required): how many elements do you want the system to return
 //o	pageNumber (Int, Required): from which page to start (take the first pageSize * pageNumber elements)
 //•	Returns: The user’s issues with their available statuses
-
-
