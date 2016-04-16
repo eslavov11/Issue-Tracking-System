@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('issueTrackingSystem.users.authentication', [])
-    .factory('authentication', [
+angular.module('issueTrackingSystem.common.issueService', [])
+    .factory('issueService', [
         '$http',
         '$q',
         'BASE_URL',
@@ -12,21 +12,9 @@ angular.module('issueTrackingSystem.users.authentication', [])
 
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'api/Token', data, config)
-                    .then(function (successData) {
-                        var headers = {
-                            headers: {
-                                Authorization: 'Bearer ' + successData.data.access_token
-                            }
-                        };
-
-                        $http.get(BASE_URL + 'users/me', headers)
-                            .then(function (personalData) {
-                                successData.isAdmin = personalData.data.isAdmin;
-                                deferred.resolve(successData);
-                            }, function () {
-                                // TODO: Handle error
-                            });
+                $http.post(BASE_URL + 'Token', data, config)
+                    .then(function (success) {
+                        deferred.resolve(success);
                     }, function (error) {
                         deferred.reject(error);
                     });
@@ -37,7 +25,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             function registerUser(user) {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'api/Account/Register', user)
+                $http.post(BASE_URL + 'Account/Register', user)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -50,7 +38,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             function logoutUser(access_token) {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'api/Account/Logout', {})
+                $http.post(BASE_URL + 'Account/Logout', {})
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -60,20 +48,9 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return deferred.promise;
             }
 
-            function getAuthHeaders() {
-                var headers = {};
-                var currentUser = {
-                    access_token: sessionStorage.access_token
-                };
-                if (currentUser) {
-                    headers['Authorization'] = 'Bearer ' + currentUser.access_token;
-                }
-                return headers;
-            }
-
             return {
                 loginUser: loginUser,
                 registerUser: registerUser,
                 logoutUser: logoutUser,
             }
-    }]);
+        }]);
