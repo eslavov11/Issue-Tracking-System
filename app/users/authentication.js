@@ -65,9 +65,15 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 var currentUser = {
                     access_token: sessionStorage.access_token
                 };
+
                 if (currentUser) {
-                    headers['Authorization'] = 'Bearer ' + currentUser.access_token;
+                    headers = {
+                        headers: {
+                            Authorization: 'Bearer ' + currentUser.access_token
+                        }
+                    };
                 }
+
                 return headers;
             }
 
@@ -75,5 +81,6 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 loginUser: loginUser,
                 registerUser: registerUser,
                 logoutUser: logoutUser,
+                getAuthHeaders: getAuthHeaders
             }
     }]);
