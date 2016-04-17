@@ -8,7 +8,7 @@ angular.module('issueTrackingSystem.navbar', [
         '$window',
         'authentication',
         function($scope, $window, authentication) {
-            $scope.show = sessionStorage.access_token == '' ? false : true;
+            $scope.show = !!sessionStorage.access_token;
 
             $scope.username = sessionStorage.username;
         }]);

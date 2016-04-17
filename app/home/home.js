@@ -3,12 +3,6 @@
 angular.module('issueTrackingSystem.home', [
     'ngRoute',
     'issueTrackingSystem.users.authentication'])
-    //.config(['$routeProvider', function($routeProvider) {
-    //    $routeProvider.when('/', {
-    //        templateUrl: 'app/home/home.html',
-    //        controller: 'HomeController'
-    //    });
-    //}])
 
     .controller('HomeController', [
         '$scope',
@@ -35,7 +29,7 @@ angular.module('issueTrackingSystem.home', [
                         var userData = {
                             username: user.email,
                             password: user.password
-                        }
+                        };
 
                         $scope.logUser(userData);
                     }, function (error) {

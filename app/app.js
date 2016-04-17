@@ -17,6 +17,11 @@ angular.module('issueTrackingSystem', [
             controller: sessionStorage.access_token ? 'DashboardController' : 'HomeController'
         });
 
+        $routeProvider.when('/projects/:id', {
+            templateUrl: 'app/projects/project.html',
+            controller: 'ProjectController'
+        });
+
         $routeProvider.when('/logout', {
             template: '',
             controller: 'LogoutController'

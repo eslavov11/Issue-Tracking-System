@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('issueTrackingSystem.common.issueService', [])
-    .factory('issueService', [
+angular.module('issueTrackingSystem.projects.projectService', [])
+    .factory('projectService', [
         '$http',
         '$q',
         'BASE_URL',
@@ -29,8 +29,22 @@ angular.module('issueTrackingSystem.common.issueService', [])
                 return deferred.promise;
             }
 
+            function getProjectById(userAuth, id) {
+                var deferred = $q.defer();
+
+                $http.get(BASE_URL + 'Projects/' + id, userAuth)
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
             return {
-                getUserIssues: getUserIssues
+                getUserIssues: getUserIssues,
+                getProjectById: getProjectById
             }
         }]);
 
