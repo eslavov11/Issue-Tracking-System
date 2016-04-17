@@ -9,7 +9,8 @@ angular.module('issueTrackingSystem', [
   'issueTrackingSystem.home',
   'issueTrackingSystem.dashboard',
   'issueTrackingSystem.users.logout',
-  'issueTrackingSystem.users.authentication'
+  'issueTrackingSystem.users.authentication',
+  'issueTrackingSystem.projects.project',
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {

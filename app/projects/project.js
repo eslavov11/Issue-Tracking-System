@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.project.project', [
+angular.module('issueTrackingSystem.projects.project', [
         'ngRoute',
         'issueTrackingSystem.users.authentication',
         'issueTrackingSystem.projects.projectService'])
@@ -10,31 +10,16 @@ angular.module('issueTrackingSystem.project.project', [
         '$route',
         'projectService',
         'authentication',
-        function($scope, projectService , authentication) {
-            var projectId = {
-                id: $route.current.params.id
-            };
+        function($scope, $route, projectService , authentication) {
+            var projectId = $route.current.params.id;
 
             projectService.getProjectById(authentication.getAuthHeaders(), projectId)
                 .then(function (project) {
+                    $scope.project = JSON.stringify(project.data);
                     console.log(project);
                 }, function (error) {
                     console.log(error);
                 });
-
-            $scope.logUser = function (user) {
-                authentication.loginUser(user)
-                    .then(function (loggedUser) {
-                        sessionStorage.access_token = loggedUser.data.access_token;
-                        sessionStorage.username = loggedUser.data.userName;
-                        sessionStorage.isAdmin = loggedUser.isAdmin;
-                        $window.location.href = '/';
-                        console.log(loggedUser);
-                    }, function (error) {
-                        alert('Login error ' + error);
-                        console.log(error);
-                    });
-            };
         }]);
 
 
