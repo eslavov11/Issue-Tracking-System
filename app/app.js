@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('issueTrackingSystem', [
   'ngRoute',
+  'ngResource',
   'issueTrackingSystem.view1',
   'issueTrackingSystem.view2',
   'issueTrackingSystem.navbar',
@@ -11,6 +12,7 @@ angular.module('issueTrackingSystem', [
   'issueTrackingSystem.users.logout',
   'issueTrackingSystem.users.authentication',
   'issueTrackingSystem.projects.project',
+  'issueTrackingSystem.password-change'
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
@@ -20,19 +22,51 @@ angular.module('issueTrackingSystem', [
 
         $routeProvider.when('/projects/:id', {
             templateUrl: 'app/projects/project.html',
-            controller: 'ProjectController'
+            controller: 'ProjectController',
+            access: {
+                requiresLogin: true
+            }
         });
 
         $routeProvider.when('/logout', {
             template: '',
-            controller: 'LogoutController'
+            controller: 'LogoutController',
+            access: {
+                requiresLogin: true
+            }
         });
 
         $routeProvider.when('/profile/password', {
-            template: 'password-change/password-change.html',
-            controller: 'PasswordChangeController'
+            templateUrl: 'app/password-change/password-change.html',
+            controller: 'PasswordChangeController',
+            access: {
+                requiresLogin: true
+            }
         });
 
-        $routeProvider.otherwise({redirectTo: '/'});
+       $routeProvider.otherwise({
+           redirectTo: '/'
+       });
     }])
-    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
+
+    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
+
+
+    .run(function ($rootScope, $location, authentication) {
+        $rootScope.$on('$locationChangeStart', function (event, requestPath, currentPath) {
+            //if (next.access.requiresAnonymous && authService.isLoggedIn()) {
+            //    $location.path('/');
+            //}
+            var newPath = requestPath.toString().substring(currentPath.toString().length, requestPath.toString().length);
+
+            var l = authentication.isLoggedIn();
+
+            if (!authentication.isLoggedIn() && newPath !== '') {
+                $location.path('/');
+            }
+
+            //if (next.access.requiresAdmin && !authService.isAdmin()) {
+            //    $location.path('/');
+            //}
+        });
+    });

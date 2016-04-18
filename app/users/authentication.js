@@ -60,6 +60,19 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return deferred.promise;
             }
 
+            function changePassword(passwordData) {
+                var deferred = $q.defer();
+
+                $http.post(BASE_URL + 'api/Account/ChangePassword',passwordData , getAuthHeaders())
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
             function getAuthHeaders() {
                 var headers = {};
                 var currentUser = {
@@ -77,10 +90,16 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return headers;
             }
 
+            function isLoggedIn() {
+                return !!sessionStorage.access_token;
+            }
+
             return {
                 loginUser: loginUser,
                 registerUser: registerUser,
                 logoutUser: logoutUser,
-                getAuthHeaders: getAuthHeaders
+                changePassword: changePassword,
+                getAuthHeaders: getAuthHeaders,
+                isLoggedIn: isLoggedIn
             }
     }]);

@@ -4,16 +4,16 @@ angular.module('issueTrackingSystem.password-change', [
         'ngRoute',
         'issueTrackingSystem.users.authentication'])
 
-    .controller('HomeController', [
+    .controller('PasswordChangeController', [
         '$scope',
         '$window',
         'authentication',
         function($scope, $window , authentication) {
             $scope.changePassword = function (changePasswordData) {
-                if (changePasswordData.newPassword !== changePasswordData.newPasswordConfirm) {
+                if (changePasswordData.NewPassword !== changePasswordData.ConfirmPassword) {
                     // TODO: ERROR
                     alert('Passwords do not match');
-                } else if (changePasswordData.oldPassword === changePasswordData.newPassword) {
+                } else if (changePasswordData.OldPassword === changePasswordData.NewPassword) {
                     // TODO: ERROR
                     alert('Old password cannot be new password... SHOULD I BE HANDLED BEFORE OR AFTER REST??');
                 }
