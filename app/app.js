@@ -28,6 +28,11 @@ angular.module('issueTrackingSystem', [
             controller: 'LogoutController'
         });
 
+        $routeProvider.when('/profile/password', {
+            template: 'password-change/password-change.html',
+            controller: 'PasswordChangeController'
+        });
+
         $routeProvider.otherwise({redirectTo: '/'});
     }])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
