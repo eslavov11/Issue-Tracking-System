@@ -61,7 +61,7 @@ body {
 
 /*CHANGE PASSWORD TMPL*/
 form#change-password {
-  width: 500px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -70,3 +70,21 @@ form#change-password button {
   margin-bottom: 20px;
 }
 /***********************/
+
+/****CREATE PROJECT TMPL***/
+#add-project h1 {
+  text-align: center;
+}
+
+#add-project {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#add-project input,
+#add-project select,
+#add-project button,
+#add-project textarea {
+  margin-bottom: 20px;
+}
+/*************************/

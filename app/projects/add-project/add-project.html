@@ -1,20 +1,27 @@
 <form id="add-project" name="add-project">
-    <label for="leader">Leader</label>
+    <h1>Create new project</h1>
+
+    <label for="name">Project name</label>
+    <input ng-model="projectData.Name" id="name" type="text" class="form-control" placeholder="Project name...">
+
+    <label for="description">Description</label>
+    <textarea ng-model="projectData.Description" name="" id="description" class="form-control" placeholder="Add project description...">
+    </textarea>
+
+    <label for="select-leader">Select leader</label>
+    <div>
+       <select id="select-leader" data-ng-options="u.Username for u in users" ng-model="projectData.Leader" class="form-control">
+       </select>
+    </div>
 
     <label for="project-key">Project key</label>
     <input ng-model="projectData.ProjectKey" id="project-key" type="text" class="form-control" placeholder="Project key...">
 
-    <label for="priorities">Priorities</label>
+    <label for="priorities">Priorities (Comma separated)</label>
     <input ng-model="projectData.Priorities" id="priorities" type="text" class="form-control" placeholder="List project priorities...">
 
-    <label for="proj-label">Label</label>
-    <input ng-model="projectData.Label" id="proj-label" type="text" class="form-control" placeholder="Give project label...">
-
-    <label for="name">Confirm Password</label>
-    <input ng-model="projectData.Name" id="name" type="text" class="form-control" placeholder="Project name...">
-
-    <label for="description">Description</label>
-    <textarea ng-model="projectData.Name" name="" id="description" cols="30" rows="10" class="form-control"></textarea>
+    <label for="proj-labels">Labels (Comma separated)</label>
+    <input ng-model="projectData.Labels" id="proj-labels" type="text" class="form-control" placeholder="Give project label...">
 
     <button class="btn btn-primary" ng-click="addNewProject(projectData)">Create project</button>
     <input class="btn btn-primary"  type="reset" value="Reset values">

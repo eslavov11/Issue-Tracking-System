@@ -6,6 +6,19 @@ angular.module('issueTrackingSystem.users.authentication', [])
         '$q',
         'BASE_URL',
         function ($http, $q, BASE_URL) {
+            function getAllUsers() {
+                var deferred = $q.defer();
+
+                $http.get(BASE_URL + 'Users/', getAuthHeaders())
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
             function loginUser(user) {
                 var data = "grant_type=password&username=" + user.username + "&password=" + user.password,
                     config = {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }};
@@ -95,6 +108,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             }
 
             return {
+                getAllUsers: getAllUsers,
                 loginUser: loginUser,
                 registerUser: registerUser,
                 logoutUser: logoutUser,

@@ -11,14 +11,42 @@ angular.module('issueTrackingSystem.projects.addProject', [
         'projectService',
         'authentication',
         function($scope, $route, projectService , authentication) {
-            $scope.addNewProject = function (projectData) {
-                //projectService.addProject(authentication.getAuthHeaders(), projectData)
-                //    .then(function (success) {
-                //        console.log(success);
-                //    }, function (error) {
-                //        console.log(error);
-                //    })
-            };
+            authentication.getAllUsers()
+                .then(function (users) {
+                    $scope.users = users.data;
+
+                    $scope.addNewProject = function (projectData) {
+                        var requestData = {
+                            Priorities: [],
+                            Labels: [],
+                            LeadId: projectData.Leader.Id,
+                            ProjectKey: projectData.ProjectKey,
+                            Name: projectData.Name,
+                            Description: projectData.Description
+                        };
+
+                        projectData.Labels.split(",").forEach(function(l) {
+                            if (l.trim()) {
+                                requestData.Labels.push({ Name: l.trim() });
+                            }
+                        });
+
+                        projectData.Priorities.split(",").forEach(function(p) {
+                            if (p.trim()) {
+                                requestData.Priorities.push({ Name: p.trim() });
+                            }
+                        });
+
+                        projectService.addProject(authentication.getAuthHeaders(), requestData)
+                            .then(function (success) {
+                                console.log(success);
+                            }, function (error) {
+                                console.log(error);
+                            })
+                    };
+                }, function (error) {
+                    console.log(error);
+                });
         }]);
 
 
