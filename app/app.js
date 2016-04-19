@@ -11,13 +11,22 @@ angular.module('issueTrackingSystem', [
   'issueTrackingSystem.dashboard',
   'issueTrackingSystem.users.logout',
   'issueTrackingSystem.users.authentication',
-  'issueTrackingSystem.projects.project',
-  'issueTrackingSystem.password-change'
+  'issueTrackingSystem.projects',
+  'issueTrackingSystem.projects.addProject',
+  'issueTrackingSystem.passwordChange'
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: sessionStorage.access_token ? 'app/dashboard/dashboard.html' : 'app/home/home.html',
             controller: sessionStorage.access_token ? 'DashboardController' : 'HomeController'
+        });
+
+        $routeProvider.when('/projects/add', {
+            templateUrl: 'app/projects/add-project/add-project.html',
+            controller: 'AddProjectController',
+            access: {
+                requiresLogin: true
+            }
         });
 
         $routeProvider.when('/projects/:id', {

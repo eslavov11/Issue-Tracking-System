@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.projects.projectService', [])
+angular.module('issueTrackingSystem.projects.service', [])
     .factory('projectService', [
         '$http',
         '$q',
@@ -19,28 +19,49 @@ angular.module('issueTrackingSystem.projects.projectService', [])
                 return deferred.promise;
             }
 
+            function getAllProjects(userAuth) {
+                var deferred = $q.defer();
+
+                $http.get(BASE_URL + 'Projects/', userAuth)
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
+            function addProject(userAuth, projectData) {
+                var deferred = $q.defer();
+
+                $http.post(BASE_URL + 'Projects/', projectData, userAuth)
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
+            function editProject(userAuth, projectData) {
+                var deferred = $q.defer();
+
+                $http.put(BASE_URL + 'Projects/', projectData, userAuth)
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
             return {
-                getProjectById: getProjectById
+                getProjectById: getProjectById,
+                getAllProjects: getAllProjects,
+                addProject: addProject,
+                editProject: editProject
             }
         }]);
-
-//
-//•	User Dashboard
-//o	Route: #/
-//o	Includes the user’s assigned issues, ordered by due date in
-//descending order and a panel with all the projects that you are associated
-//with (you have an assigned issue in them or you are a project leader)
-
-
-//[GET] Issues/me?pageSize={pageSize}&pageNumber={pageNumber}&orderBy={by}
-//•	Purpose: Gets the user’s currently assigned issues ordered by a given criteria
-//•	Security: Logged in
-//•	Url parameters:
-//    o	orderBy (String): the property of the issue which you want the issues to be sorted by
-//	Supports all issue’s properties (for example Project, IssueKey, DueDate)
-//	Supports child properties (for example Project.Name will sort the issues by the name of their project)
-//	Supports descending sorting, just add “desc” after the property (for example “IssueKey desc”)
-//	Supports multiple criteria using comma separated syntax (for example “Project.Name desc, IssueKey, Priority.Name desc”)
-//o	pageSize (Int, Required): how many elements do you want the system to return
-//o	pageNumber (Int, Required): from which page to start (take the first pageSize * pageNumber elements)
-//•	Returns: The user’s issues with their available statuses

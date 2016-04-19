@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.password-change', [
+angular.module('issueTrackingSystem.passwordChange', [
         'ngRoute',
         'issueTrackingSystem.users.authentication'])
 

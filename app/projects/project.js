@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('issueTrackingSystem.projects.project', [
+angular.module('issueTrackingSystem.projects', [
         'ngRoute',
         'issueTrackingSystem.users.authentication',
-        'issueTrackingSystem.projects.projectService'])
+        'issueTrackingSystem.projects.service'])
 
     .controller('ProjectController', [
         '$scope',

@@ -1,0 +1,21 @@
+<form id="add-project" name="add-project">
+    <label for="leader">Leader</label>
+
+    <label for="project-key">Project key</label>
+    <input ng-model="projectData.ProjectKey" id="project-key" type="text" class="form-control" placeholder="Project key...">
+
+    <label for="priorities">Priorities</label>
+    <input ng-model="projectData.Priorities" id="priorities" type="text" class="form-control" placeholder="List project priorities...">
+
+    <label for="proj-label">Label</label>
+    <input ng-model="projectData.Label" id="proj-label" type="text" class="form-control" placeholder="Give project label...">
+
+    <label for="name">Confirm Password</label>
+    <input ng-model="projectData.Name" id="name" type="text" class="form-control" placeholder="Project name...">
+
+    <label for="description">Description</label>
+    <textarea ng-model="projectData.Name" name="" id="description" cols="30" rows="10" class="form-control"></textarea>
+
+    <button class="btn btn-primary" ng-click="addNewProject(projectData)">Create project</button>
+    <input class="btn btn-primary"  type="reset" value="Reset values">
+</form>
