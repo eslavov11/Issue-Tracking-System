@@ -107,6 +107,10 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return !!sessionStorage.access_token;
             }
 
+            function isAdmin() {
+                return ('true' === sessionStorage.isAdmin);
+            }
+
             return {
                 getAllUsers: getAllUsers,
                 loginUser: loginUser,
@@ -114,6 +118,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 logoutUser: logoutUser,
                 changePassword: changePassword,
                 getAuthHeaders: getAuthHeaders,
-                isLoggedIn: isLoggedIn
+                isLoggedIn: isLoggedIn,
+                isAdmin: isAdmin,
             }
     }]);

@@ -13,7 +13,9 @@ angular.module('issueTrackingSystem.projects.addProject', [
         function($scope, $route, projectService , authentication) {
             authentication.getAllUsers()
                 .then(function (users) {
-                    $scope.users = users.data;
+                    $scope.users = users.data.sort(function(a, b) {
+                        return a.Username.localeCompare(b.Username);
+                    });
 
                     $scope.addNewProject = function (projectData) {
                         var requestData = {
@@ -40,6 +42,7 @@ angular.module('issueTrackingSystem.projects.addProject', [
                         projectService.addProject(authentication.getAuthHeaders(), requestData)
                             .then(function (success) {
                                 console.log(success);
+                                $location.path("projects/" + success.data.Id);
                             }, function (error) {
                                 console.log(error);
                             })

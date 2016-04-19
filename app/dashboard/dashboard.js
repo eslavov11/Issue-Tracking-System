@@ -7,11 +7,20 @@ angular.module('issueTrackingSystem.dashboard', [
 
     .controller('DashboardController', [
         '$scope',
-        '$window',
+        '$location',
         'authentication',
         'issueService',
-        function($scope, $window, authentication, issueService) {
+        function($scope, $location, authentication, issueService) {
             $scope.username = sessionStorage.username;
+            $scope.isAdmin = authentication.isAdmin();
+
+            $scope.addNewProject = function() {
+                $location.path("projects/add");
+            };
+
+            $scope.listAllProjects = function() {
+                $location.path("projects/");
+            };
 
             issueService.getUserIssues(authentication.getAuthHeaders())
                 .then(function (issues) {
