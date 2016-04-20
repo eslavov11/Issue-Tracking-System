@@ -106,3 +106,21 @@ form#change-password button {
   margin-bottom: 20px;
 }
 /*************************/
+
+/****ADD ISSUE TMPL***/
+#add-issue h1 {
+  text-align: center;
+}
+
+#add-issue {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#add-issue input,
+#add-issue select,
+#add-issue button,
+#add-issue textarea {
+  margin-bottom: 20px;
+}
+/*************************/

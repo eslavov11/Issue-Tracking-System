@@ -14,6 +14,7 @@ angular.module('issueTrackingSystem', [
   'issueTrackingSystem.projects',
   'issueTrackingSystem.projects.addProject',
   'issueTrackingSystem.projects.editProject',
+  'issueTrackingSystem.issues.addIssue',
   'issueTrackingSystem.passwordChange'
 ])
     .config(['$routeProvider', function($routeProvider) {
@@ -33,6 +34,14 @@ angular.module('issueTrackingSystem', [
         $routeProvider.when('/projects/:id/edit', {
             templateUrl: 'app/projects/edit-project/edit-project.html',
             controller: 'EditProjectController',
+            access: {
+                requiresLogin: true
+            }
+        });
+
+        $routeProvider.when('/projects/:id/add-issue', {
+            templateUrl: 'app/issues/add-issue/add-issue.html',
+            controller: 'AddIssueController',
             access: {
                 requiresLogin: true
             }

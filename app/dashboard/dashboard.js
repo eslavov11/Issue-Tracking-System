@@ -3,7 +3,7 @@
 angular.module('issueTrackingSystem.dashboard', [
         'ngRoute',
         'issueTrackingSystem.users.authentication',
-        'issueTrackingSystem.common.issueService'])
+        'issueTrackingSystem.issues.service'])
 
     .controller('DashboardController', [
         '$scope',
