@@ -88,3 +88,21 @@ form#change-password button {
   margin-bottom: 20px;
 }
 /*************************/
+
+/****EDIT PROJECT TMPL***/
+#edit-project h1 {
+  text-align: center;
+}
+
+#edit-project {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#edit-project input,
+#edit-project select,
+#edit-project button,
+#edit-project textarea {
+  margin-bottom: 20px;
+}
+/*************************/
