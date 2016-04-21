@@ -8,9 +8,10 @@ angular.module('issueTrackingSystem.projects.addProject', [
     .controller('AddProjectController', [
         '$scope',
         '$route',
+        '$location',
         'projectService',
         'authentication',
-        function($scope, $route, projectService , authentication) {
+        function($scope, $route, $location, projectService , authentication) {
             authentication.getAllUsers()
                 .then(function (users) {
                     $scope.users = users.data.sort(function(a, b) {

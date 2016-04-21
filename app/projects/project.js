@@ -8,15 +8,21 @@ angular.module('issueTrackingSystem.projects', [
     .controller('ProjectController', [
         '$scope',
         '$route',
+        '$location',
         'projectService',
         'authentication',
-        function($scope, $route, projectService , authentication) {
+        function($scope, $route, $location, projectService , authentication) {
             var projectId = $route.current.params.id;
 
             projectService.getProjectById(authentication.getAuthHeaders(), projectId)
                 .then(function (project) {
+                    $scope.isLeader = project.data.Lead.Username === authentication.getUsername();
+
                     $scope.project = JSON.stringify(project.data);
-                    console.log(project);
+
+                    $scope.addIssue = function () {
+                        $location.path("projects/" + $route.current.params.id + '/add-issue');
+                    }
                 }, function (error) {
                     console.log(error);
                 });
