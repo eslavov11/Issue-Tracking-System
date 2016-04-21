@@ -111,6 +111,10 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return ('true' === sessionStorage.isAdmin);
             }
 
+            function getUsername() {
+                return sessionStorage.username;
+            }
+
             return {
                 getAllUsers: getAllUsers,
                 loginUser: loginUser,
@@ -120,5 +124,6 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 getAuthHeaders: getAuthHeaders,
                 isLoggedIn: isLoggedIn,
                 isAdmin: isAdmin,
+                getUsername: getUsername
             }
     }]);
