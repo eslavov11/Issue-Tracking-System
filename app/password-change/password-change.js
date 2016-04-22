@@ -6,9 +6,9 @@ angular.module('issueTrackingSystem.passwordChange', [
 
     .controller('PasswordChangeController', [
         '$scope',
-        '$window',
+        '$location',
         'authentication',
-        function($scope, $window , authentication) {
+        function($scope, $location , authentication) {
             $scope.changePassword = function (changePasswordData) {
                 if (changePasswordData.NewPassword !== changePasswordData.ConfirmPassword) {
                     // TODO: ERROR
@@ -20,7 +20,7 @@ angular.module('issueTrackingSystem.passwordChange', [
 
                 authentication.changePassword(changePasswordData)
                     .then(function (success) {
-                        $window.location.href = '/';
+                        $location.path('/');
                     }, function (error) {
                         alert('Change password error ' + error);
                         console.log(error);

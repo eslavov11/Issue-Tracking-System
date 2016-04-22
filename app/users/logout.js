@@ -5,15 +5,15 @@ angular.module('issueTrackingSystem.users.logout', [
 
     .controller('LogoutController', [
         '$scope',
-        '$window',
+        '$location',
         'authentication',
-        function($scope, $window, authentication) {
+        function($scope, $location, authentication) {
             //TODO: call server
             authentication.logoutUser({access_token: localStorage.access_token})
                 .then(function () {
                     localStorage.access_token = '';
                     localStorage.username = '';
-                    $window.location.href = '/';
+                    window.location.reload();
                     //TODO: notify user
                 }, function (error) {
                     console.log(error);

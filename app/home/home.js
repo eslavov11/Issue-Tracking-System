@@ -15,7 +15,7 @@ angular.module('issueTrackingSystem.home', [
                         localStorage.access_token = loggedUser.data.access_token;
                         localStorage.username = loggedUser.data.userName;
                         localStorage.isAdmin = loggedUser.isAdmin;
-                        $window.location.href = '/';
+                        window.location.reload();
                         console.log(loggedUser);
                     }, function (error) {
                         alert('Login error ' + error);
