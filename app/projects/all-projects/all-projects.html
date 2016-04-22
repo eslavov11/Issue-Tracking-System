@@ -1,0 +1,26 @@
+<section id="projects-table" >
+    <h1>List of all projects</h1>
+
+    <div>
+        <a ng-click="addProject()">Add new project</a>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Leader</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="p in projects">
+            <td>{{p.Id}}</td>
+            <td>{{p.Name}}</td>
+            <td>{{p.Lead.Username}}</td>
+            <td>
+                <a ng-click="editProject(p.Id)">Edit</a> |
+                <a ng-click="openProject(p.Id)">Details</a> |
+                <a ng-click="addIssue(p.Id)">Add issue</a>
+            </td>
+        </tr>
+    </table>
+</section>

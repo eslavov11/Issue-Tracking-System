@@ -12,6 +12,7 @@ angular.module('issueTrackingSystem', [
   'issueTrackingSystem.users.logout',
   'issueTrackingSystem.users.authentication',
   'issueTrackingSystem.projects',
+  'issueTrackingSystem.projects.allProjects',
   'issueTrackingSystem.projects.addProject',
   'issueTrackingSystem.projects.editProject',
   'issueTrackingSystem.issues',
@@ -60,6 +61,14 @@ angular.module('issueTrackingSystem', [
             }
         });
 
+        $routeProvider.when('/projects', {
+            templateUrl: 'app/projects/all-projects/all-projects.html',
+            controller: 'AllProjectsController',
+            access: {
+                requiresAdmin: true
+            }
+        });
+
         $routeProvider.when('/issues/:id/edit', {
             templateUrl: 'app/issues/edit-issue/edit-issue.html',
             controller: 'EditIssueController',
@@ -99,39 +108,12 @@ angular.module('issueTrackingSystem', [
 
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
 
-
-
     .run(function ($rootScope, $location, authentication) {
         $rootScope.$on('$routeChangeStart', function (event, next) {
-            //if (next.access.requiresAnonymous && authService.isLoggedIn()) {
-            //    $location.path('/');
-            //}
-
             if (!authentication.isLoggedIn() && next.access.requiresLogin) {
                 $location.path('/');
+            } else if (!authentication.isAdmin() && next.access.requiresAdmin) {
+                $location.path('/');
             }
-
-            //if (next.access.requiresAdmin && !authService.isAdmin()) {
-            //    $location.path('/');
-            //}
         });
     });
-
-
-//.run(function ($rootScope, $location, authentication) {
-//    $rootScope.$on('$locationChangeStart', function (event, requestPath, currentPath) {
-//        if (authentication.access.requiresLogin && authentication.isLoggedIn()) {
-//            $location.path('/');
-//        }
-//        var newPath = requestPath.toString().substring(currentPath.toString().length, requestPath.toString().length);
-//
-//        var l = authentication.isLoggedIn();
-//
-//        if (!authentication.isLoggedIn() && newPath !== '') {
-//            $location.path('/');
-//        }
-//
-//        //if (requestPath.access.requiresAdmin && !authService.isAdmin()) {
-//        //    $location.path('/');
-//        //}
-//    }); })

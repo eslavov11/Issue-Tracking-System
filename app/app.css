@@ -142,3 +142,17 @@ form#change-password button {
   margin-bottom: 20px;
 }
 /*************************/
+
+/****ALL PROJECTS TMPL***/
+#projects-table a {
+  cursor: pointer;
+}
+
+#projects-table {
+  width: 85%;
+  margin: 0 auto;
+}
+
+#projects-table div {
+  margin-bottom: 10px;
+}

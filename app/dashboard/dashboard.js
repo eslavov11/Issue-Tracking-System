@@ -15,11 +15,11 @@ angular.module('issueTrackingSystem.dashboard', [
             $scope.isAdmin = authentication.isAdmin();
 
             $scope.addNewProject = function() {
-                $location.path("projects/add");
+                $location.path("/projects/add");
             };
 
             $scope.listAllProjects = function() {
-                $location.path("projects/");
+                $location.path("/projects");
             };
 
             issueService.getUserIssues(authentication.getAuthHeaders())
