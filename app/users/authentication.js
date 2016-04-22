@@ -89,7 +89,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             function getAuthHeaders() {
                 var headers = {};
                 var currentUser = {
-                    access_token: sessionStorage.access_token
+                    access_token: localStorage.access_token
                 };
 
                 if (currentUser) {
@@ -104,15 +104,15 @@ angular.module('issueTrackingSystem.users.authentication', [])
             }
 
             function isLoggedIn() {
-                return !!sessionStorage.access_token;
+                return !!localStorage.access_token;
             }
 
             function isAdmin() {
-                return ('true' === sessionStorage.isAdmin);
+                return ('true' === localStorage.isAdmin);
             }
 
             function getUsername() {
-                return sessionStorage.username;
+                return localStorage.username;
             }
 
             return {

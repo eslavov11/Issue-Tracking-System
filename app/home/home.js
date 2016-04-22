@@ -12,9 +12,9 @@ angular.module('issueTrackingSystem.home', [
             $scope.logUser = function (user) {
                 authentication.loginUser(user)
                     .then(function (loggedUser) {
-                        sessionStorage.access_token = loggedUser.data.access_token;
-                        sessionStorage.username = loggedUser.data.userName;
-                        sessionStorage.isAdmin = loggedUser.isAdmin;
+                        localStorage.access_token = loggedUser.data.access_token;
+                        localStorage.username = loggedUser.data.userName;
+                        localStorage.isAdmin = loggedUser.isAdmin;
                         $window.location.href = '/';
                         console.log(loggedUser);
                     }, function (error) {

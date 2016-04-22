@@ -11,7 +11,7 @@ angular.module('issueTrackingSystem.dashboard', [
         'authentication',
         'issueService',
         function($scope, $location, authentication, issueService) {
-            $scope.username = sessionStorage.username;
+            $scope.username = localStorage.username;
             $scope.isAdmin = authentication.isAdmin();
 
             $scope.addNewProject = function() {

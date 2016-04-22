@@ -21,8 +21,11 @@ angular.module('issueTrackingSystem', [
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: sessionStorage.access_token ? 'app/dashboard/dashboard.html' : 'app/home/home.html',
-            controller: sessionStorage.access_token ? 'DashboardController' : 'HomeController'
+            templateUrl: localStorage.access_token ? 'app/dashboard/dashboard.html' : 'app/home/home.html',
+            controller: localStorage.access_token ? 'DashboardController' : 'HomeController',
+            access: {
+                requiresLogin: !!localStorage.access_token
+            }
         });
 
         $routeProvider.when('/projects/add', {
@@ -97,16 +100,14 @@ angular.module('issueTrackingSystem', [
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
 
 
+
     .run(function ($rootScope, $location, authentication) {
-        $rootScope.$on('$locationChangeStart', function (event, requestPath, currentPath) {
+        $rootScope.$on('$routeChangeStart', function (event, next) {
             //if (next.access.requiresAnonymous && authService.isLoggedIn()) {
             //    $location.path('/');
             //}
-            var newPath = requestPath.toString().substring(currentPath.toString().length, requestPath.toString().length);
 
-            var l = authentication.isLoggedIn();
-
-            if (!authentication.isLoggedIn() && newPath !== '') {
+            if (!authentication.isLoggedIn() && next.access.requiresLogin) {
                 $location.path('/');
             }
 
@@ -115,3 +116,22 @@ angular.module('issueTrackingSystem', [
             //}
         });
     });
+
+
+//.run(function ($rootScope, $location, authentication) {
+//    $rootScope.$on('$locationChangeStart', function (event, requestPath, currentPath) {
+//        if (authentication.access.requiresLogin && authentication.isLoggedIn()) {
+//            $location.path('/');
+//        }
+//        var newPath = requestPath.toString().substring(currentPath.toString().length, requestPath.toString().length);
+//
+//        var l = authentication.isLoggedIn();
+//
+//        if (!authentication.isLoggedIn() && newPath !== '') {
+//            $location.path('/');
+//        }
+//
+//        //if (requestPath.access.requiresAdmin && !authService.isAdmin()) {
+//        //    $location.path('/');
+//        //}
+//    }); })

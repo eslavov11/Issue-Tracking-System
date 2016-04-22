@@ -9,10 +9,10 @@ angular.module('issueTrackingSystem.users.logout', [
         'authentication',
         function($scope, $window, authentication) {
             //TODO: call server
-            authentication.logoutUser({access_token: sessionStorage.access_token})
+            authentication.logoutUser({access_token: localStorage.access_token})
                 .then(function () {
-                    sessionStorage.access_token = '';
-                    sessionStorage.username = '';
+                    localStorage.access_token = '';
+                    localStorage.username = '';
                     $window.location.href = '/';
                     //TODO: notify user
                 }, function (error) {
