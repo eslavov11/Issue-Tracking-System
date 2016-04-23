@@ -22,11 +22,23 @@ angular.module('issueTrackingSystem.dashboard', [
                 $location.path("/projects");
             };
 
-            issueService.getUserIssues(authentication.getAuthHeaders())
-                .then(function (issues) {
-                    console.log(issues);
+            var params = {
+                pageSize: 5,
+                pageNumber: 1,
+                orderBy: 'DueDate desc'
+            };
 
-                    $scope.issues = JSON.stringify(issues.data.Issues);
+            issueService.getUserIssues(authentication.getAuthHeaders(), params)
+                .then(function (issues) {
+                    $scope.issues = issues.data.Issues;
+
+                    $scope.editIssue = function (id) {
+                        $location.path("issues/" + id + '/edit');
+                    };
+
+                    $scope.openIssue = function (id) {
+                        $location.path("issues/" + id);
+                    };
                 }, function (error) {
                     console.log(error);
                 })

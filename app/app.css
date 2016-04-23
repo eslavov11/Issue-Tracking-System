@@ -156,3 +156,19 @@ form#change-password button {
 #projects-table div {
   margin-bottom: 10px;
 }
+/*************************/
+
+/****DASHBOARD TMPL***/
+#user-issues a {
+  cursor: pointer;
+}
+
+#user-issues {
+  width: 85%;
+  margin: 0 auto;
+}
+
+#user-issues div {
+  margin-bottom: 10px;
+}
+/*************************/

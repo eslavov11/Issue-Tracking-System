@@ -36,10 +36,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 var deferred = $q.defer();
 
                 // TODO: test
-                params = params || {};
-                params.pageSize = 2;
-                params.pageNumber = 1;
-                params.orderBy = 'Project.Name desc, IssueKey';
+                //params = params || {};
+                //params.pageSize = 2;
+                //params.pageNumber = 1;
+                //params.orderBy = 'Project.Name desc, IssueKey';
                 // **********
 
                 $http.get(BASE_URL + 'issues/me?orderBy=' + params.orderBy +

@@ -1,8 +1,32 @@
-<h1>Welcome, {{username}}</h1>
+<section id="user-issues" >
+    <h1>List of all {{username}} issues</h1>
 
-<p>
-    {{issues}}
-</p>
+    <!--<div>-->
+        <!--<a ng-click="addProject()">Add new project</a>-->
+    <!--</div>-->
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Due date</th>
+            <th>Project</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="i in issues">
+            <td>{{i.Id}}</td>
+            <td>{{i.Title}}</td>
+            <td>{{i.DueDate}}</td>
+            <td>{{i.Project.Name}}</td>
+            <td>
+                <a ng-click="editIssue(i.Id)">Edit</a> |
+                <a ng-click="openIssue(i.Id)">Details</a>
+                <!--<a ng-click="addIssue(p.Id)">Add issue</a>-->
+            </td>
+        </tr>
+    </table>
+</section>
+
 
 <button id="new-project" ng-show="isAdmin" ng-click="addNewProject()" class="btn btn-primary">Add new project</button>
 <button id="all-projects" ng-show="isAdmin" ng-click="listAllProjects()" class="btn btn-primary">All projects</button>
