@@ -3,16 +3,25 @@
 angular.module('issueTrackingSystem.dashboard', [
         'ngRoute',
         'issueTrackingSystem.users.authentication',
-        'issueTrackingSystem.issues.service'])
+        'issueTrackingSystem.issues.service',
+        'issueTrackingSystem.projects.service'])
 
     .controller('DashboardController', [
         '$scope',
         '$location',
         'authentication',
         'issueService',
-        function($scope, $location, authentication, issueService) {
+        'projectService',
+        function($scope, $location, authentication, issueService, projectService) {
             $scope.username = localStorage.username;
             $scope.isAdmin = authentication.isAdmin();
+
+            $scope.predicate = 'DueDate';
+            $scope.reverse = true;
+            $scope.order = function (predicate) {
+                $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                $scope.predicate = predicate;
+            };
 
             $scope.addNewProject = function() {
                 $location.path("/projects/add");
@@ -22,13 +31,17 @@ angular.module('issueTrackingSystem.dashboard', [
                 $location.path("/projects");
             };
 
-            var params = {
+            var issuesParams = {
                 pageSize: 5,
                 pageNumber: 1,
                 orderBy: 'DueDate desc'
+            }, projectsParams = {
+                pageSize: 5,
+                pageNumber: 1,
+                leadId: authentication.getUserId()
             };
 
-            issueService.getUserIssues(authentication.getAuthHeaders(), params)
+            issueService.getUserIssues(authentication.getAuthHeaders(), issuesParams)
                 .then(function (issues) {
                     $scope.issues = issues.data.Issues;
 
@@ -41,8 +54,30 @@ angular.module('issueTrackingSystem.dashboard', [
                     };
                 }, function (error) {
                     console.log(error);
-                })
+                });
+
+            projectService.getProjectsForUser(authentication.getAuthHeaders(), projectsParams)
+                .then(function (response) {
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                });
         }]);
+
+//[GET] Projects/?pageSize={pageSize}&pageNumber={pageNumber}&{filter}={value}
+//•	Purpose: Gets projects by a given filter
+//•	Security: Logged In
+//•	Url parameters:
+//    o	filter (String): the filters which you want the projects to be filtered by
+//	Supports every projects property with equals, less (or equal) than, greater (or equal) than comparators
+// (for example “Name == “SIT Project””)
+//	Supports child properties (for example: “Lead.Id == “e980a9d8-53e5-4f6b-b8ae-1efec2e58938””)
+//	Supports multiple criterias using “and” and “or” in between them
+// (for example “Lead.Username == "admin@softuni.bg" or Description.Contains("test"))
+//o	pageSize (Int, Required): how many elements do you want the system to return
+//o	pageNumber (Int, Required): from which page to start (take the first pageSize * pageNumber elements)
+//•	Returns: The projects with their leaders
+
 
 //
 //•	User Dashboard

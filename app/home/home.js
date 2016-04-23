@@ -12,11 +12,7 @@ angular.module('issueTrackingSystem.home', [
             $scope.logUser = function (user) {
                 authentication.loginUser(user)
                     .then(function (loggedUser) {
-                        localStorage.access_token = loggedUser.data.access_token;
-                        localStorage.username = loggedUser.data.userName;
-                        localStorage.isAdmin = loggedUser.isAdmin;
                         window.location.reload();
-                        console.log(loggedUser);
                     }, function (error) {
                         alert('Login error ' + error);
                         console.log(error);

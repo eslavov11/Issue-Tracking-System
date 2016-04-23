@@ -11,8 +11,11 @@ angular.module('issueTrackingSystem.users.logout', [
             //TODO: call server
             authentication.logoutUser({access_token: localStorage.access_token})
                 .then(function () {
-                    localStorage.access_token = '';
-                    localStorage.username = '';
+                    delete localStorage.access_token;
+                    delete localStorage.username;
+                    delete localStorage.userId;
+                    delete localStorage.isAdmin;
+                    
                     window.location.reload();
                     //TODO: notify user
                 }, function (error) {

@@ -19,6 +19,26 @@ angular.module('issueTrackingSystem.projects.service', [])
                 return deferred.promise;
             }
 
+            function getProjectsForUser(userAuth, params) {
+                //projects?filter=Lead.Id=\"77dc87c7-150a-4148-b71c-f3fb1be7b2ce\"&pageSize=4&pageNumber=1"
+                var deferred = $q.defer();
+
+                $http.get(BASE_URL +
+                    'Projects/?filter=Lead.Id=\"' +
+                    params.leadId +
+                    '\"&pageSize=' +
+                    params.pageSize +
+                    '&pageNumber=' +
+                    params.pageNumber, userAuth)
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
             function getAllProjects(userAuth) {
                 var deferred = $q.defer();
 
@@ -60,6 +80,7 @@ angular.module('issueTrackingSystem.projects.service', [])
 
             return {
                 getProjectById: getProjectById,
+                getProjectsForUser: getProjectsForUser,
                 getAllProjects: getAllProjects,
                 addProject: addProject,
                 editProject: editProject

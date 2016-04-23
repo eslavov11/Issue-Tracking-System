@@ -11,14 +11,14 @@ angular.module('issueTrackingSystem', [
   'issueTrackingSystem.dashboard',
   'issueTrackingSystem.users.logout',
   'issueTrackingSystem.users.authentication',
+  'issueTrackingSystem.users.passwordChange',
   'issueTrackingSystem.projects',
   'issueTrackingSystem.projects.allProjects',
   'issueTrackingSystem.projects.addProject',
   'issueTrackingSystem.projects.editProject',
   'issueTrackingSystem.issues',
   'issueTrackingSystem.issues.addIssue',
-  'issueTrackingSystem.issues.editIssue',
-  'issueTrackingSystem.passwordChange'
+  'issueTrackingSystem.issues.editIssue'
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
@@ -33,7 +33,7 @@ angular.module('issueTrackingSystem', [
             templateUrl: 'app/projects/add-project/add-project.html',
             controller: 'AddProjectController',
             access: {
-                requiresLogin: true
+                requiresAdmin: true
             }
         });
 
@@ -94,7 +94,7 @@ angular.module('issueTrackingSystem', [
         });
 
         $routeProvider.when('/profile/password', {
-            templateUrl: 'app/password-change/password-change.html',
+            templateUrl: 'app/users/password-change/password-change.html',
             controller: 'PasswordChangeController',
             access: {
                 requiresLogin: true

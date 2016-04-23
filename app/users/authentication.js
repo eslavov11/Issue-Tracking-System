@@ -36,6 +36,13 @@ angular.module('issueTrackingSystem.users.authentication', [])
                         $http.get(BASE_URL + 'users/me', headers)
                             .then(function (personalData) {
                                 successData.isAdmin = personalData.data.isAdmin;
+                                successData.userId = personalData.data.Id;
+
+                                localStorage.access_token = successData.data.access_token;
+                                localStorage.username = successData.data.userName;
+                                localStorage.userId = successData.userId;
+                                localStorage.isAdmin = successData.isAdmin;
+
                                 deferred.resolve(successData);
                             }, function () {
                                 // TODO: Handle error
@@ -115,6 +122,10 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return localStorage.username;
             }
 
+            function getUserId() {
+                return localStorage.userId;
+            }
+
             return {
                 getAllUsers: getAllUsers,
                 loginUser: loginUser,
@@ -124,6 +135,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 getAuthHeaders: getAuthHeaders,
                 isLoggedIn: isLoggedIn,
                 isAdmin: isAdmin,
-                getUsername: getUsername
+                getUsername: getUsername,
+                getUserId: getUserId
             }
     }]);
