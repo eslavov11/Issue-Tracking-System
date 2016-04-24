@@ -15,7 +15,7 @@ angular.module('issueTrackingSystem.users.logout', [
                     delete localStorage.username;
                     delete localStorage.userId;
                     delete localStorage.isAdmin;
-                    
+
                     window.location.reload();
                     //TODO: notify user
                 }, function (error) {

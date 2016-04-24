@@ -12,6 +12,8 @@ angular.module('issueTrackingSystem.projects.editProject', [
         'projectService',
         'authentication',
         function($scope, $location, $route, projectService , authentication) {
+            $scope.contentLoaded = false;
+
             authentication.getAllUsers()
                 .then(function (users) {
                     $scope.users = users.data.sort(function(a, b) {
@@ -20,6 +22,13 @@ angular.module('issueTrackingSystem.projects.editProject', [
 
                     projectService.getProjectById(authentication.getAuthHeaders(), $route.current.params.id)
                         .then(function (response) {
+                            // redirecting to home if user is not project leader
+                            if (response.data.Lead.Id !== authentication.getUserId()) {
+                                $location.path("/");
+                            }
+
+                            $scope.contentLoaded = true;
+
                             var labels = [],
                                 priorities = [];
 
