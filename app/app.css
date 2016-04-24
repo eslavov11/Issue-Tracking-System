@@ -126,13 +126,25 @@ form#change-password button {
 /*************************/
 
 /****EDIT-ISSUE TMPL***/
+#edit-issue-wrapper {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
 #edit-issue h1 {
   text-align: center;
 }
 
 #edit-issue {
-  max-width: 500px;
+  display: inline-block;
   margin: 0 auto;
+}
+
+ aside {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 50px;
+  margin-left:30px;;
 }
 
 #edit-issue input,

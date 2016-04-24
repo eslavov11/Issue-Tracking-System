@@ -52,7 +52,10 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                 });
 
             function renderContent() {
+                $scope.isProjectLead = $scope.issueData.Author.Id === authentication.getUserId();
+
                 var labels = [];
+
                 $scope.issueData.Labels.forEach(function (label) {
                     labels.push(label.Name)
                 });
@@ -94,5 +97,16 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                             console.log(error);
                         })
                 };
+                
+                $scope.changeStatus = function (statusId) {
+                    issueService.editIssueStatus(authentication.getAuthHeaders(), $scope.issueData.Id,statusId)
+                        .then(function (response) {
+                            // TODO: add notification for changing status!!!!!
+                            console.log(response);
+                            $route.reload();
+                        }, function (error) {
+                            console.log(error);
+                        })
+                }
             }
         }]);

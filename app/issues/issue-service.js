@@ -81,10 +81,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function editIssueStatus(userAuth, statusId) {
+            function editIssueStatus(userAuth, issueId, statusId) {
                 var deferred = $q.defer();
 
-                $http.put(BASE_URL + 'Issues/changestatus?statusid=' + statusId, userAuth)
+                $http.put(BASE_URL + 'Issues/' + issueId + '/changestatus?statusid=' + statusId, {}, userAuth)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -110,7 +110,7 @@ angular.module('issueTrackingSystem.issues.service', [])
             function addIssueComment(userAuth, commentText) {
                 var deferred = $q.defer();
 
-                $http.put(BASE_URL + 'Issues/' + id + '/comments', commentText , userAuth)
+                $http.post(BASE_URL + 'Issues/' + id + '/comments', commentText , userAuth)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
