@@ -38,7 +38,8 @@ angular.module('issueTrackingSystem.issues.editIssue', [
 
                                     $scope.contentLoaded = true;
 
-                                    renderContent(response);
+                                    $scope.issueData = response.data;
+                                    renderContent();
                                 }, function (error) {
                                     console.log(error);
                                 })
@@ -50,14 +51,23 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                     console.log(error);
                 });
 
-            function renderContent(response) {
+            function renderContent() {
                 var labels = [];
-                $scope.issueData = response.data;
                 $scope.issueData.Labels.forEach(function (label) {
                     labels.push(label.Name)
                 });
-                $scope.issueData.Labels = labels;
+                $scope.issueData.Labels = labels.join(', ');
                 $scope.issueData.DueDate = new Date($scope.issueData.DueDate.slice(0,10));
+
+                $scope.issueData.Assignee = $scope.users.filter(function (user) {
+                    return user.Id === $scope.issueData.Assignee.Id;
+                })[0];
+
+                $scope.issueData.Project = $scope.projects.filter(function (p) {
+                    return p.Id === $scope.issueData.Project.Id;
+                })[0];
+
+                $scope.issueData.Priority = $scope.issueData.Project.Priorities[0];
 
                 $scope.editIssue = function (issueData) {
                     var requestData = {

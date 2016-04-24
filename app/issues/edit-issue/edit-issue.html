@@ -10,19 +10,20 @@
 
     <label for="select-leader">Select assignee</label>
     <div>
-        <select id="select-leader" data-ng-options="u.Username for u in users" ng-model="issueData.Assignee" class="form-control">
+        <select id="select-leader" ng-options="u.Username for u in users" ng-model="issueData.Assignee" class="form-control">
         </select>
     </div>
 
-    <label for="select-leader">Select project</label>
+    <label for="select-project">Select project</label>
     <div>
-        <select id="select-project" data-ng-options="p.Name for p in projects" ng-model="issueData.Project" class="form-control">
+        <select id="select-project" ng-options="p.Name for p in projects" ng-model="issueData.Project" class="form-control">
         </select>
     </div>
 
-    <label for="select-leader">Choose priority</label>
+    <label for="select-priority">Choose priority</label>
     <div>
-        <select id="select-priority" data-ng-options="p.Name for p in issueData.Project.Priorities" ng-model="issueData.Priority" class="form-control">
+        <select id="select-priority" ng-options="p.Name for p in issueData.Project.Priorities"
+                ng-model="issueData.Priority" class="form-control">
         </select>
     </div>
 

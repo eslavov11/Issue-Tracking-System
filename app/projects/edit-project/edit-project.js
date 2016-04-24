@@ -41,8 +41,12 @@ angular.module('issueTrackingSystem.projects.editProject', [
                                 priorities.push(label.Name)
                             });
 
-                            $scope.projectData.Priorities = priorities;
-                            $scope.projectData.Labels = labels;
+                            $scope.projectData.Priorities = priorities.join(', ');
+                            $scope.projectData.Labels = labels.join(', ');
+
+                            $scope.projectData.Leader = $scope.users.filter(function (user) {
+                                return user.Id === $scope.projectData.Lead.Id;
+                            })[0];
 
                             $scope.editProject = function (projectData) {
                                 var requestData = {
