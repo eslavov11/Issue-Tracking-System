@@ -19,7 +19,7 @@ angular.module('issueTrackingSystem.issues', [
                     $scope.isAssignee = response.data.Assignee.Username === authentication.getUsername();
                     $scope.isLeader = response.data.Author.Username === authentication.getUsername();
 
-                    $scope.issue = JSON.stringify(response.data);
+                    $scope.issue = response.data;
 
                     $scope.editIssue = function () {
                         $location.path("issues/" + $route.current.params.id + '/edit');
@@ -27,6 +27,28 @@ angular.module('issueTrackingSystem.issues', [
                 }, function (error) {
                     console.log(error);
                 });
+
+            issueService.getIssueCommentsById(authentication.getAuthHeaders(), issueId)
+                .then(function (response) {
+                    $scope.comments = response.data;
+                    console.log($scope.comments);
+                }, function (error) {
+                    console.log(error);
+                });
+
+            $scope.addComment = function () {
+                var comment = {
+                    Text: $scope.commentText
+                };
+
+                issueService.addIssueComment(authentication.getAuthHeaders(), issueId, comment)
+                    .then(function (response) {
+                        $scope.comments = response.data;
+                        $scope.commentText = '';
+                    }, function (error) {
+                        console.log(error);
+                    });
+            }
         }]);
 
 //•	Issue page

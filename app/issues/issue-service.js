@@ -107,10 +107,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function addIssueComment(userAuth, commentText) {
+            function addIssueComment(userAuth, issueId, commentText) {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'Issues/' + id + '/comments', commentText , userAuth)
+                $http.post(BASE_URL + 'Issues/' + issueId + '/comments', commentText, userAuth)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {

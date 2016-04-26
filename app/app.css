@@ -107,6 +107,48 @@ form#change-password button {
 }
 /*************************/
 
+/****ISSUE TMPL***********/
+#issue-page {
+  width: 84%;
+  margin: 0 auto;
+}
+
+#issue-page ul {
+  padding: 0;
+}
+
+#issue-page li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#issue-comments {
+  margin: 40px auto;
+  width: 84%;
+}
+
+#issue-comments h4 {
+  display: inline-block;
+  font-weight: bold;
+}
+
+#issue-comments p {
+  width: 60%;
+}
+
+.comment-wrapper {
+  margin: 10px 0;
+}
+
+#add-comment-wrapper {
+  margin-top: 30px;
+}
+
+#add-comment-wrapper button {
+  margin-top: 10px;
+}
+/*************************/
+
 /****ADD-ISSUE TMPL***/
 #add-issue h1 {
   text-align: center;
