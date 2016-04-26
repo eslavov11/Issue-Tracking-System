@@ -1,5 +1,51 @@
-<p>
-    {{project}}
-</p>
+<section id="project-page">
+    <h2>Project details</h2>
+    <hr/>
 
-<button ng-show="isLeader" class="btn btn-primary" ng-click="addIssue()">Add issue</button>
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+        <dd>
+            {{project.Name}}
+        </dd>
+
+        <dt>
+            Project key
+        </dt>
+        <dd>
+            {{project.ProjectKey}}
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+        <dd>
+            {{project.Description}}
+        </dd>
+
+        <dt>
+            Leader
+        </dt>
+        <dd>
+            {{project.Lead.Username}}
+        </dd>
+
+        <dt>
+            Priorities
+        </dt>
+        <dd>
+            {{prioritiesString}}
+        </dd>
+
+        <dt>
+            Labels
+        </dt>
+        <dd>
+            {{labelsString}}
+        </dd>
+    </dl>
+
+    <button ng-show="isLeader" class="btn btn-primary" ng-click="editProject()">Edit</button>
+    <button ng-show="isLeader" class="btn btn-primary" ng-click="addIssue()">Add issue</button>
+</section>

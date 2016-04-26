@@ -18,11 +18,22 @@ angular.module('issueTrackingSystem.projects', [
                 .then(function (project) {
                     $scope.isLeader = project.data.Lead.Username === authentication.getUsername();
 
-                    $scope.project = JSON.stringify(project.data);
+                    $scope.project = project.data;
+                    $scope.prioritiesString = $scope.project.Priorities.map(function(pr){
+                        return pr.Name;
+                    }).join(", ");
+
+                    $scope.labelsString = $scope.project.Labels.map(function(lbl){
+                        return lbl.Name;
+                    }).join(", ");
+
+                    $scope.editProject = function () {
+                        $location.path("projects/" + $route.current.params.id + '/edit');
+                    };
 
                     $scope.addIssue = function () {
                         $location.path("projects/" + $route.current.params.id + '/add-issue');
-                    }
+                    };
                 }, function (error) {
                     console.log(error);
                 });

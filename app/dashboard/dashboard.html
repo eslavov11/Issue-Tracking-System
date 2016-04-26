@@ -43,15 +43,29 @@
 
     <aside id="associated-projects">
         <h3>Associated projects</h3>
-
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="p in projects">
+        <ul>
+            <li ng-repeat="p in projects">
                 <a href="#/projects/{{p.Id}}">{{p.Name}}</a>
             </li>
-            <li class="list-group-item" ng-repeat="project in issueProjects">
+            <li ng-repeat="project in issueProjects">
                 <a href="#/projects/{{project.Id}}">{{project.Name}}</a>
             </li>
             <div ng-if="projects.length == 0 && issueProjects.length == 0" style="text-align: center;">No projects</div>
         </ul>
+
+        <!--<table class="table">-->
+            <!--<tr ng-repeat="p in projects">-->
+                <!--<td>-->
+                    <!--<a href="#/projects/{{p.Id}}">{{p.Name}}</a>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--<tr ng-repeat="project in issueProjects">-->
+                <!--<td>-->
+                    <!--<a href="#/projects/{{project.Id}}">{{project.Name}}</a>-->
+                <!--</td>-->
+            <!--</tr>-->
+
+            <div ng-if="projects.length == 0 && issueProjects.length == 0" style="text-align: center;">No projects</div>
+        </table>
     </aside>
 </main>

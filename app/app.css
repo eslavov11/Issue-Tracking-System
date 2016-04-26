@@ -71,6 +71,13 @@ form#change-password button {
 }
 /***********************/
 
+/****ISSUE TMPL***********/
+#project-page {
+  width: 84%;
+  margin: 0 auto;
+}
+/***********************/
+
 /****ADD-PROJECT TMPL***/
 #add-project h1 {
   text-align: center;
@@ -254,5 +261,14 @@ form#change-password button {
 
 #associated-projects {
   margin-left: 11%;
+}
+
+#associated-projects ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#associated-projects li {
+  margin: 5px 0;
 }
 /*************************/
