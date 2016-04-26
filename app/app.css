@@ -175,16 +175,16 @@ form#change-password button {
   text-align: center;
 }
 
-#user-issues a {
+#dashboard a {
   cursor: pointer;
 }
 
-#user-issues {
+#dashboard {
   width: 85%;
   margin: 0 auto;
 }
 
-#user-issues div {
+#dashboard div {
   margin-bottom: 10px;
 }
 
@@ -203,5 +203,14 @@ form#change-password button {
 .table-column:hover {
   color: #eee;
   text-decoration: underline;
+}
+
+#user-issues {
+  width: 70%;
+  display: inline-block;
+}
+
+#associated-projects {
+  margin-left: 11%;
 }
 /*************************/

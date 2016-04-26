@@ -45,6 +45,16 @@ angular.module('issueTrackingSystem.dashboard', [
                 .then(function (issues) {
                     $scope.issues = issues.data.Issues;
 
+                    var issueProjects = [];
+
+                    issues.data.Issues.forEach(function (issue) {
+                        if (!checkForDuplicates(issue.Project.Name, issueProjects)) {
+                            issueProjects.push(issue.Project);
+                        }
+                    });
+
+                    $scope.issueProjects = issueProjects;
+
                     $scope.editIssue = function (id) {
                         $location.path("issues/" + id + '/edit');
                     };
@@ -58,10 +68,23 @@ angular.module('issueTrackingSystem.dashboard', [
 
             projectService.getProjectsForUser(authentication.getAuthHeaders(), projectsParams)
                 .then(function (response) {
+                    $scope.projects = response.data.Projects;
                     console.log(response);
                 }, function (error) {
                     console.log(error);
                 });
+
+            function checkForDuplicates(name, array) {
+                var found = false;
+                for(var i = 0; i < array.length; i++) {
+                    if (array[i].Name === name) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                return found;
+            }
         }]);
 
 //[GET] Projects/?pageSize={pageSize}&pageNumber={pageNumber}&{filter}={value}
