@@ -9,10 +9,16 @@
     </textarea>
 
     <label for="select-leader">Select leader</label>
-    <div>
-       <select id="select-leader" data-ng-options="u.Username for u in users" ng-model="projectData.Leader" class="form-control">
-       </select>
+    <input type="text" ng-model="projectData.Leader" id="select-leader" class="form-control" placeholder="Select project leader..."
+           ng-keyup="getUsersByFilter()" autocomplete="off" focus-element="userSelected">
+    <div ng-if="filteredUsers.length > 0" class="label-holder">
+        <div ng-repeat="user in filteredUsers" ng-click="setLeader(user)" class="label-option">{{user.Username}}</div>
     </div>
+    <!--<label for="select-leader">Select leader</label>-->
+    <!--<div>-->
+       <!--<select id="select-leader" data-ng-options="u.Username for u in users" ng-model="projectData.Leader" class="form-control">-->
+       <!--</select>-->
+    <!--</div>-->
 
     <label for="project-key">Project key</label>
     <input ng-model="projectData.ProjectKey" id="project-key" type="text" class="form-control" placeholder="Project key...">

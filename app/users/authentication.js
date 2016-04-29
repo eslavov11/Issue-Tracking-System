@@ -19,6 +19,19 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return deferred.promise;
             }
 
+            function getUsersByFilter(filter) {
+                var deferred = $q.defer();
+
+                $http.get(BASE_URL + 'Users/?filter=Username.Contains(\"' + filter + '\")', getAuthHeaders())
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
             function loginUser(user) {
                 var data = "grant_type=password&username=" + user.username + "&password=" + user.password,
                     config = {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }};
@@ -128,6 +141,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
 
             return {
                 getAllUsers: getAllUsers,
+                getUsersByFilter: getUsersByFilter,
                 loginUser: loginUser,
                 registerUser: registerUser,
                 logoutUser: logoutUser,

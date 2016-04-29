@@ -24,10 +24,14 @@ angular.module('issueTrackingSystem.projects.addProject', [
                 });
 
             $scope.addNewProject = function () {
+                var leader = $scope.users.filter(function (user) {
+                    return user.Username === $scope.projectData.Leader;
+                })[0];
+
                 var requestData = {
                     Priorities: [],
                     Labels: [],
-                    LeadId: $scope.projectData.Leader.Id,
+                    LeadId: leader.Id,
                     ProjectKey: $scope.projectData.ProjectKey,
                     Name: $scope.projectData.Name,
                     Description: $scope.projectData.Description
@@ -86,6 +90,30 @@ angular.module('issueTrackingSystem.projects.addProject', [
                 $scope.labels = [];
 
                 $scope.labelSelected = true;
+            };
+
+            $scope.getUsersByFilter = function() {
+                var stringFilter = $scope.projectData.Leader;
+                if (stringFilter) {
+                    if (stringFilter.length >= 2) {
+                        authentication.getUsersByFilter(stringFilter)
+                            .then(function success(response) {
+                                $scope.filteredUsers = response.data;
+                            }, function error(err) {
+                                console.log(err);
+                                //notifyService.showError("Failed loading data...", err);
+                            });
+                    } else {
+                        $scope.filteredUsers = [];
+                    }
+                }
+            };
+
+            $scope.setLeader = function (leader) {
+                $scope.projectData.Leader = leader.Username;
+                $scope.filteredUsers = [];
+
+                $scope.userSelected = true;
             }
         }]);
 
