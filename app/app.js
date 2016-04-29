@@ -4,8 +4,7 @@
 angular.module('issueTrackingSystem', [
   'ngRoute',
   'ngResource',
-  'issueTrackingSystem.view1',
-  'issueTrackingSystem.view2',
+  'issueTrackingSystem.directives.focusElement',
   'issueTrackingSystem.navbar',
   'issueTrackingSystem.home',
   'issueTrackingSystem.dashboard',

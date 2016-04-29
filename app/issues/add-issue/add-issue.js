@@ -89,50 +89,7 @@ angular.module('issueTrackingSystem.issues.addIssue', [
 
                 $scope.issueData.LabelsText += label.Name + ', ';
                 $scope.labels = [];
+
+                $scope.labelSelected = true;
             }
         }]);
-
-//"data": [
-//    {
-//        "key": "Title",
-//        "value": "new title for issuee",
-//        "type": "text",
-//        "enabled": true
-//    },
-//    {
-//        "key": "Description",
-//        "value": "blablablabla lorem",
-//        "type": "text",
-//        "enabled": true
-//    },
-//    {
-//        "key": "DueDate",
-//        "value": "2016-5-25",
-//        "type": "text",
-//        "enabled": true
-//    },
-//    {
-//        "key": "AssigneeId",
-//        "value": "e980a9d8-53e5-4f6b-b8ae-1efec2e58938",
-//        "type": "text",
-//        "enabled": true
-//    },
-//    {
-//        "key": "PriorityId",
-//        "value": "3",
-//        "type": "text",
-//        "enabled": true
-//    },
-//    {
-//        "key": "Labels[0].Name",
-//        "value": "NewLabel",
-//        "type": "text",
-//        "enabled": true
-//    },
-//    {
-//        "key": "Labels[1].Name",
-//        "value": "Label5",
-//        "type": "text",
-//        "enabled": true
-//    }
-//],
