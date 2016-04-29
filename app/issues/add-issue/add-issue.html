@@ -30,7 +30,11 @@
     <input ng-model="issueData.Due" id="due" type="date" class="form-control" />
 
     <label for="proj-labels">Labels (Comma separated)</label>
-    <input ng-model="issueData.Labels" id="proj-labels" type="text" class="form-control" placeholder="Give issue label...">
+    <input ng-model="issueData.LabelsText" id="proj-labels" type="text" class="form-control" placeholder="Give issue label..."
+           ng-keyup="getLabels()" autocomplete="off">
+    <div ng-if="labels.length > 0" class="label-holder">
+        <div ng-repeat="label in labels" ng-click="addLabel(label)" class="label-option">{{label.Name}}</div>
+    </div>
 
     <button class="btn btn-primary" ng-click="addNewIssue(issueData)">Create issue</button>
     <input class="btn btn-primary"  type="reset" value="Reset values">
