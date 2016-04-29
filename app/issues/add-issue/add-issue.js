@@ -33,18 +33,18 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                     console.log(error);
                 });
 
-            $scope.addNewIssue = function (issueData) {
+            $scope.addNewIssue = function () {
                 var requestData = {
-                    PriorityId: issueData.Priority.Id,
+                    PriorityId: $scope.issueData.Priority.Id,
                     Labels: [],
-                    DueDate: new Date(issueData.Due).toISOString().slice(0,10),
-                    AssigneeId: issueData.Assignee.Id,
-                    ProjectId: issueData.Project.Id,
-                    Title: issueData.Title,
-                    Description: issueData.Description
+                    DueDate: new Date($scope.issueData.Due).toISOString().slice(0,10),
+                    AssigneeId: $scope.issueData.Assignee.Id,
+                    ProjectId: $scope.issueData.Project.Id,
+                    Title: $scope.issueData.Title,
+                    Description: $scope.issueData.Description
                 };
 
-                issueData.LabelsText.split(",").forEach(function(l) {
+                $scope.issueData.LabelsText.split(",").forEach(function(l) {
                     if (l.trim()) {
                         requestData.Labels.push({ Name: l.trim() });
                     }

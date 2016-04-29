@@ -22,31 +22,41 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                         return a.Username.localeCompare(b.Username);
                     });
 
-                    projectService.getAllProjects(authentication.getAuthHeaders())
-                        .then(function (projects) {
-                            $scope.projects = projects.data.sort(function(a, b) {
-                                return a.Name.localeCompare(b.Name);
-                            });
+                    $scope.issueData.Assignee = $scope.users.filter(function (user) {
+                        return user.Id === $scope.issueData.Assignee.Id;
+                    })[0];
 
-                            issueService.getIssueById(authentication.getAuthHeaders(), $route.current.params.id)
-                                .then(function (response) {
-                                    // redirecting to home if user is not lead or assignee
-                                    if (response.data.Author.Id !== authentication.getUserId() &&
-                                        response.data.Assignee.Id !== authentication.getUserId()) {
-                                        $location.path("/");
-                                    }
+                }, function (error) {
+                    console.log(error);
+                });
 
-                                    $scope.contentLoaded = true;
+            projectService.getAllProjects(authentication.getAuthHeaders())
+                .then(function (projects) {
+                    $scope.projects = projects.data.sort(function(a, b) {
+                        return a.Name.localeCompare(b.Name);
+                    });
 
-                                    $scope.issueData = response.data;
-                                    renderContent();
-                                }, function (error) {
-                                    console.log(error);
-                                })
-                        }, function (error) {
-                            console.log(error);
-                        })
+                    $scope.issueData.Project = $scope.projects.filter(function (p) {
+                        return p.Id === $scope.issueData.Project.Id;
+                    })[0];
 
+                    $scope.issueData.Priority = $scope.issueData.Project.Priorities[0];
+                }, function (error) {
+                    console.log(error);
+                });
+
+            issueService.getIssueById(authentication.getAuthHeaders(), $route.current.params.id)
+                .then(function (response) {
+                    // redirecting to home if user is not lead or assignee
+                    if (response.data.Author.Id !== authentication.getUserId() &&
+                        response.data.Assignee.Id !== authentication.getUserId()) {
+                        $location.path("/");
+                    }
+
+                    $scope.contentLoaded = true;
+
+                    $scope.issueData = response.data;
+                    renderContent();
                 }, function (error) {
                     console.log(error);
                 });
@@ -62,29 +72,19 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                 $scope.issueData.Labels = labels.join(', ');
                 $scope.issueData.DueDate = new Date($scope.issueData.DueDate.slice(0,10));
 
-                $scope.issueData.Assignee = $scope.users.filter(function (user) {
-                    return user.Id === $scope.issueData.Assignee.Id;
-                })[0];
-
-                $scope.issueData.Project = $scope.projects.filter(function (p) {
-                    return p.Id === $scope.issueData.Project.Id;
-                })[0];
-
-                $scope.issueData.Priority = $scope.issueData.Project.Priorities[0];
-
-                $scope.editIssue = function (issueData) {
+                $scope.editIssue = function () {
                     var requestData = {
-                        Id: issueData.Id,
-                        PriorityId: issueData.Priority.Id,
+                        Id: $scope.issueData.Id,
+                        PriorityId: $scope.issueData.Priority.Id,
                         Labels: [],
-                        DueDate: new Date(issueData.DueDate).toISOString().slice(0,10),
-                        AssigneeId: issueData.Assignee.Id,
-                        ProjectId: issueData.Project.Id,
-                        Title: issueData.Title,
-                        Description: issueData.Description
+                        DueDate: new Date($scope.issueData.DueDate).toISOString().slice(0,10),
+                        AssigneeId: $scope.issueData.Assignee.Id,
+                        ProjectId: $scope.issueData.Project.Id,
+                        Title: $scope.issueData.Title,
+                        Description: $scope.issueData.Description
                     };
 
-                    issueData.Labels.toString().split(",").forEach(function(l) {
+                    $scope.issueData.Labels.toString().split(",").forEach(function(l) {
                         if (l.trim()) {
                             requestData.Labels.push({ Name: l.trim() });
                         }

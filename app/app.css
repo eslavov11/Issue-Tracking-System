@@ -272,3 +272,26 @@ form#change-password button {
   margin: 5px 0;
 }
 /*************************/
+
+/*****COMMON IN TEMPLS**/
+.label-option {
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.label-option:hover {
+  background: #286090;
+  color: floralwhite;
+  cursor: pointer;
+}
+
+.label-holder {
+  height: 130px;
+  overflow: scroll;
+  overflow-x: hidden;
+  border: 1px solid grey;
+  border-top: none;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+/***********************/

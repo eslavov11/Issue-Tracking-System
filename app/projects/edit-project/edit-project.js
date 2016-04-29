@@ -20,69 +20,68 @@ angular.module('issueTrackingSystem.projects.editProject', [
                         return a.Username.localeCompare(b.Username);
                     });
 
-                    projectService.getProjectById(authentication.getAuthHeaders(), $route.current.params.id)
-                        .then(function (response) {
-                            // redirecting to home if user is not project leader
-                            if (response.data.Lead.Id !== authentication.getUserId()) {
-                                $location.path("/");
-                            }
-
-                            $scope.contentLoaded = true;
-
-                            var labels = [],
-                                priorities = [];
-
-                            $scope.projectData = response.data;
-                            $scope.projectData.Priorities.forEach(function (priority) {
-                                labels.push(priority.Name)
-                            });
-
-                            $scope.projectData.Labels.forEach(function (label) {
-                                priorities.push(label.Name)
-                            });
-
-                            $scope.projectData.Priorities = priorities.join(', ');
-                            $scope.projectData.Labels = labels.join(', ');
-
-                            $scope.projectData.Leader = $scope.users.filter(function (user) {
-                                return user.Id === $scope.projectData.Lead.Id;
-                            })[0];
-
-                            $scope.editProject = function (projectData) {
-                                var requestData = {
-                                    Id: projectData.Id,
-                                    Priorities: [],
-                                    Labels: [],
-                                    LeadId: projectData.Leader.Id,
-                                    Name: projectData.Name,
-                                    Description: projectData.Description
-                                };
-
-                                projectData.Labels.toString().split(",").forEach(function(l) {
-                                    if (l.trim()) {
-                                        requestData.Labels.push({ Name: l.trim() });
-                                    }
-                                });
-
-                                projectData.Priorities.toString().split(",").forEach(function(p) {
-                                    if (p.trim()) {
-                                        requestData.Priorities.push({ Name: p.trim() });
-                                    }
-                                });
-
-                                projectService.editProject(authentication.getAuthHeaders(), requestData)
-                                    .then(function (success) {
-                                        console.log(success);
-                                        $location.path("projects/" + success.data.Id);
-                                    }, function (error) {
-                                        console.log(error);
-                                    })
-                            };
-                        }, function (error) {
-                            console.log(error);
-                        });
-
+                    $scope.projectData.Leader = $scope.users.filter(function (user) {
+                        return user.Id === $scope.projectData.Lead.Id;
+                    })[0];
                 }, function (error) {
                     console.log(error);
                 });
+
+            projectService.getProjectById(authentication.getAuthHeaders(), $route.current.params.id)
+                .then(function (response) {
+                    // redirecting to home if user is not project leader
+                    if (response.data.Lead.Id !== authentication.getUserId()) {
+                        $location.path("/");
+                    }
+
+                    $scope.contentLoaded = true;
+
+                    var labels = [],
+                        priorities = [];
+
+                    $scope.projectData = response.data;
+                    $scope.projectData.Priorities.forEach(function (priority) {
+                        labels.push(priority.Name)
+                    });
+
+                    $scope.projectData.Labels.forEach(function (label) {
+                        priorities.push(label.Name)
+                    });
+
+                    $scope.projectData.Priorities = priorities.join(', ');
+                    $scope.projectData.Labels = labels.join(', ');
+                }, function (error) {
+                    console.log(error);
+                });
+
+            $scope.editProject = function () {
+                var requestData = {
+                    Id: $scope.projectData.Id,
+                    Priorities: [],
+                    Labels: [],
+                    LeadId: $scope.projectData.Leader.Id,
+                    Name: $scope.projectData.Name,
+                    Description: $scope.projectData.Description
+                };
+
+                $scope.projectData.Labels.toString().split(",").forEach(function(l) {
+                    if (l.trim()) {
+                        requestData.Labels.push({ Name: l.trim() });
+                    }
+                });
+
+                $scope.projectData.Priorities.toString().split(",").forEach(function(p) {
+                    if (p.trim()) {
+                        requestData.Priorities.push({ Name: p.trim() });
+                    }
+                });
+
+                projectService.editProject(authentication.getAuthHeaders(), requestData)
+                    .then(function (success) {
+                        console.log(success);
+                        $location.path("projects/" + success.data.Id);
+                    }, function (error) {
+                        console.log(error);
+                    })
+            };
         }]);
