@@ -16,35 +16,6 @@ angular.module('issueTrackingSystem.issues.editIssue', [
         function($scope, $location, $route, projectService, issueService, authentication) {
             $scope.contentLoaded = false;
 
-            authentication.getAllUsers()
-                .then(function (users) {
-                    $scope.users = users.data.sort(function(a, b) {
-                        return a.Username.localeCompare(b.Username);
-                    });
-
-                    $scope.issueData.Assignee = $scope.users.filter(function (user) {
-                        return user.Id === $scope.issueData.Assignee.Id;
-                    })[0];
-
-                }, function (error) {
-                    console.log(error);
-                });
-
-            projectService.getAllProjects(authentication.getAuthHeaders())
-                .then(function (projects) {
-                    $scope.projects = projects.data.sort(function(a, b) {
-                        return a.Name.localeCompare(b.Name);
-                    });
-
-                    $scope.issueData.Project = $scope.projects.filter(function (p) {
-                        return p.Id === $scope.issueData.Project.Id;
-                    })[0];
-
-                    $scope.issueData.Priority = $scope.issueData.Project.Priorities[0];
-                }, function (error) {
-                    console.log(error);
-                });
-
             issueService.getIssueById(authentication.getAuthHeaders(), $route.current.params.id)
                 .then(function (response) {
                     // redirecting to home if user is not lead or assignee
@@ -56,10 +27,48 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                     $scope.contentLoaded = true;
 
                     $scope.issueData = response.data;
+
+                    getUsers();
+
                     renderContent();
                 }, function (error) {
                     console.log(error);
                 });
+
+            function getUsers() {
+                authentication.getAllUsers()
+                    .then(function (users) {
+                        $scope.users = users.data.sort(function(a, b) {
+                            return a.Username.localeCompare(b.Username);
+                        });
+
+                        $scope.issueData.Assignee = $scope.users.filter(function (user) {
+                            return user.Id === $scope.issueData.Assignee.Id;
+                        })[0];
+
+                        getProjects();
+
+                    }, function (error) {
+                        console.log(error);
+                    });
+            }
+
+            function getProjects() {
+                projectService.getAllProjects(authentication.getAuthHeaders())
+                    .then(function (projects) {
+                        $scope.projects = projects.data.sort(function(a, b) {
+                            return a.Name.localeCompare(b.Name);
+                        });
+
+                        $scope.issueData.Project = $scope.projects.filter(function (p) {
+                            return p.Id === $scope.issueData.Project.Id;
+                        })[0];
+
+                        $scope.issueData.Priority = $scope.issueData.Project.Priorities[0];
+                    }, function (error) {
+                        console.log(error);
+                    });
+            }
 
             function renderContent() {
                 $scope.isProjectLead = $scope.issueData.Author.Id === authentication.getUserId();

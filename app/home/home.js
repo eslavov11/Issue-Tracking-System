@@ -10,6 +10,10 @@ angular.module('issueTrackingSystem.home', [
         'authentication',
         function($scope, $window , authentication) {
             $scope.logUser = function (user) {
+                if (user.password.toString().length < 6) {
+                    return;
+                }
+
                 authentication.loginUser(user)
                     .then(function (loggedUser) {
                         window.location.reload();
@@ -20,6 +24,14 @@ angular.module('issueTrackingSystem.home', [
             };
 
             $scope.registerUser = function (user) {
+                if (user.password.toString().length < 6 || user.confirmPassword.toString().length < 6) {
+                    return;
+                } else if (user.password.toString() !== user.confirmPassword.toString().length) {
+                    // TODO: NOTY passwordss do not match
+                    alert('Passwords do not match. Try again.');
+                    return;
+                }
+
                 authentication.registerUser(user)
                     .then(function (registeredUser) {
                         var userData = {

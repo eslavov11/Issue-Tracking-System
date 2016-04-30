@@ -7,11 +7,11 @@
         <form name="login">
             <div>
                 <label for="log-user">Username</label>
-                <input type="text" ng-model="userData.username" id="log-user" class="form-control" placeholder="Enter your email..." />
+                <input type="email" ng-model="userData.username" id="log-user" class="form-control" placeholder="Enter your email..." required />
             </div>
             <div>
                 <label for="log-password">Password</label>
-                <input type="password" ng-model="userData.password" id="log-password" class="form-control" placeholder="Enter password..." />
+                <input type="password" ng-model="userData.password" id="log-password" class="form-control" placeholder="Enter password..." required minlength="6" />
             </div>
             <button class="btn btn-primary" ng-click="logUser(userData)">Login</button>
         </form>
@@ -20,15 +20,15 @@
             <form name="register">
                 <div>
                     <label for="reg-username">Username</label>
-                    <input type="text" ng-model="regUserData.email" id="reg-username" class="form-control" placeholder="Enter your email..." />
+                    <input type="email" ng-model="regUserData.email" id="reg-username" class="form-control" placeholder="Enter your email..." required/>
                 </div>
                 <div>
                     <label for="reg-password">Password</label>
-                    <input type="password" ng-model="regUserData.password" id="reg-password" class="form-control" placeholder="Enter password..." />
+                    <input type="password" ng-model="regUserData.password" id="reg-password" class="form-control" placeholder="Enter password..." required minlength="6"/>
                 </div>
                 <div>
                     <label for="reg-rp-password">Repeat password</label>
-                    <input type="password" ng-model="regUserData.confirmPassword" id="reg-rp-password" class="form-control" placeholder="Repeat password..." />
+                    <input type="password" ng-model="regUserData.confirmPassword" id="reg-rp-password" class="form-control" placeholder="Repeat password..." required minlength="6"/>
                 </div>
                 <button class="btn btn-primary" ng-click="registerUser(regUserData)">Register</button>
                 // TODO: Validate forms

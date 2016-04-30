@@ -8,11 +8,18 @@
     <textarea ng-model="issueData.Description" name="" id="description" class="form-control" placeholder="Add issue description...">
     </textarea>
 
-    <label for="select-leader">Select assignee</label>
-    <div>
-        <select id="select-leader" data-ng-options="u.Username for u in users" ng-model="issueData.Assignee" class="form-control">
-        </select>
+    <label for="select-assignee">Select assignee</label>
+    <input type="text" ng-model="issueData.Assignee" id="select-assignee" class="form-control" placeholder="Select issue assignee..."
+           ng-keyup="getUsersByFilter()" autocomplete="off" focus-element="userSelected">
+    <div ng-if="filteredUsers.length > 0" class="label-holder">
+        <div ng-repeat="user in filteredUsers" ng-click="setAssignee(user)" class="label-option">{{user.Username}}</div>
     </div>
+
+    <!--<label for="select-leader">Select assignee</label>-->
+    <!--<div>-->
+        <!--<select id="select-leader" data-ng-options="u.Username for u in users" ng-model="issueData.Assignee" class="form-control">-->
+        <!--</select>-->
+    <!--</div>-->
 
     <label for="select-leader">Select project</label>
     <div>
@@ -20,13 +27,13 @@
         </select>
     </div>
 
-    <label for="select-leader">Choose priority</label>
+    <label for="select-priority">Choose priority</label>
     <div>
         <select id="select-priority" data-ng-options="p.Name for p in issueData.Project.Priorities" ng-model="issueData.Priority" class="form-control">
         </select>
     </div>
 
-    <label for="select-leader">Due</label>
+    <label for="due">Due</label>
     <input ng-model="issueData.Due" id="due" type="date" class="form-control" />
 
     <label for="issue-labels">Labels (Comma separated)</label>

@@ -34,11 +34,16 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                 });
 
             $scope.addNewIssue = function () {
+                var assignee = $scope.users.filter(function (user) {
+                    return user.Username === $scope.issueData.Assignee;
+                })[0];
+
+
                 var requestData = {
                     PriorityId: $scope.issueData.Priority.Id,
                     Labels: [],
                     DueDate: new Date($scope.issueData.Due).toISOString().slice(0,10),
-                    AssigneeId: $scope.issueData.Assignee.Id,
+                    AssigneeId: assignee.Id,
                     ProjectId: $scope.issueData.Project.Id,
                     Title: $scope.issueData.Title,
                     Description: $scope.issueData.Description
@@ -91,5 +96,29 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                 $scope.labels = [];
 
                 $scope.labelSelected = true;
+            }
+
+            $scope.getUsersByFilter = function() {
+                var stringFilter = $scope.issueData.Assignee;
+                if (stringFilter) {
+                    if (stringFilter.length >= 2) {
+                        authentication.getUsersByFilter(stringFilter)
+                            .then(function success(response) {
+                                $scope.filteredUsers = response.data;
+                            }, function error(err) {
+                                console.log(err);
+                                //notifyService.showError("Failed loading data...", err);
+                            });
+                    } else {
+                        $scope.filteredUsers = [];
+                    }
+                }
+            };
+
+            $scope.setAssignee = function (assignee) {
+                $scope.issueData.Assignee = assignee.Username;
+                $scope.filteredUsers = [];
+
+                $scope.userSelected = true;
             }
         }]);

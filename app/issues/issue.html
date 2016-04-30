@@ -57,11 +57,11 @@
 
     <footer>
         <button ng-show="isLeader" ng-click="editIssue()" class="btn btn-primary">Edit issue</button>
-        <button ng-show="isAssignee" ng-click="editIssue()" class="btn btn-primary">Change status</button>
+        <button ng-show="isAssignee && !isLeader" ng-click="editIssue()" class="btn btn-primary">Change status</button>
     </footer>
 </section>
 
-<section id="issue-comments">
+<section id="issue-comments" ng-show="isLeader || isAssignee">
     <article ng-repeat="comment in comments" class="comment-wrapper">
         <header>
             <h4>{{comment.Author.Username}}</h4> - {{comment.CreatedOn | date:'dd/MM/yyyy hh:mm:ss'}}
