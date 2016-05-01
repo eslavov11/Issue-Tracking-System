@@ -5,6 +5,7 @@ angular.module('issueTrackingSystem', [
   'ngRoute',
   'ngResource',
   'issueTrackingSystem.directives.focusElement',
+  'issueTrackingSystem.common.notyService',
   'issueTrackingSystem.navbar',
   'issueTrackingSystem.home',
   'issueTrackingSystem.dashboard',

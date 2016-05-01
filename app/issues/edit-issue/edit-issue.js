@@ -82,6 +82,10 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                 $scope.issueData.DueDate = new Date($scope.issueData.DueDate.slice(0,10));
 
                 $scope.editIssue = function () {
+                    if (!validateData()) {
+                        return;
+                    }
+
                     var requestData = {
                         Id: $scope.issueData.Id,
                         PriorityId: $scope.issueData.Priority.Id,
@@ -117,5 +121,20 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                             console.log(error);
                         })
                 }
+            }
+
+            function validateData() {
+                var data = $scope.issueData || {};
+                if (!data.Assignee ||
+                    !data.Labels ||
+                    !data.Project ||
+                    !data.DueDate ||
+                    !data.Priority ||
+                    !data.Title ||
+                    !data.Description) {
+                    return false;
+                }
+
+                return true;
             }
         }]);

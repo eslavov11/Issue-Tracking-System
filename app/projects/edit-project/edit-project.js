@@ -55,6 +55,10 @@ angular.module('issueTrackingSystem.projects.editProject', [
                 });
 
             $scope.editProject = function () {
+                if (!validateData()) {
+                    return;
+                }
+
                 var requestData = {
                     Id: $scope.projectData.Id,
                     Priorities: [],
@@ -84,4 +88,19 @@ angular.module('issueTrackingSystem.projects.editProject', [
                         console.log(error);
                     })
             };
+
+            function validateData() {
+                var data = $scope.projectData || {};
+
+                if (!data.Leader ||
+                    !data.Labels ||
+                    !data.ProjectKey ||
+                    !data.Name ||
+                    !data.Description ||
+                    !data.Priorities) {
+                    return false;
+                }
+
+                return true;
+            }
         }]);

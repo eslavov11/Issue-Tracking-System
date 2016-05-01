@@ -71,11 +71,11 @@
         </p>
     </article>
 
-    <article id="add-comment-wrapper">
+    <form id="add-comment-wrapper">
         <label for="comment">Add comment</label>
-        <textarea ng-model="commentText" id="comment" class="form-control" placeholder="Add new comment...">
+        <textarea ng-model="commentText" id="comment" class="form-control" placeholder="Add new comment..." required="required">
         </textarea>
 
         <button class="btn btn-primary" ng-click="addComment()">Submit</button>
-    </article>
+    </form>
 </section>

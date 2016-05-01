@@ -37,6 +37,10 @@ angular.module('issueTrackingSystem.issues', [
                 });
 
             $scope.addComment = function () {
+                if (!$scope.commentText) {
+                    return;
+                }
+
                 var comment = {
                     Text: $scope.commentText
                 };

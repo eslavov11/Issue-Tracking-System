@@ -34,6 +34,10 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                 });
 
             $scope.addNewIssue = function () {
+                if (!validateData()) {
+                    return;
+                }
+
                 var assignee = $scope.users.filter(function (user) {
                     return user.Username === $scope.issueData.Assignee;
                 })[0];
@@ -120,5 +124,27 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                 $scope.filteredUsers = [];
 
                 $scope.userSelected = true;
+            }
+
+            function validateData() {
+                var data = $scope.issueData || {};
+
+                if (!data.Project) {
+                    //TODO: NOTY
+                    alert('Please select a project');
+                    return false;
+                } else if (!data.Priority) {
+                    //TODO: NOTY
+                    alert('Please select priority');
+                    return false;
+                } else if (!data.Assignee ||
+                    !data.LabelsText ||
+                    !data.Due ||
+                    !data.Title ||
+                    !data.Description) {
+                    return false;
+                }
+
+                return true;
             }
         }]);

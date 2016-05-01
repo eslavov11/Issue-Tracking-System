@@ -24,6 +24,10 @@ angular.module('issueTrackingSystem.projects.addProject', [
                 });
 
             $scope.addNewProject = function () {
+                if (!validateData()) {
+                    return;
+                }
+
                 var leader = $scope.users.filter(function (user) {
                     return user.Username === $scope.projectData.Leader;
                 })[0];
@@ -114,17 +118,20 @@ angular.module('issueTrackingSystem.projects.addProject', [
                 $scope.filteredUsers = [];
 
                 $scope.userSelected = true;
+            };
+
+            function validateData() {
+                var data = $scope.projectData || {};
+
+                if (!data.Leader ||
+                    !data.LabelsText ||
+                    !data.ProjectKey ||
+                    !data.Name ||
+                    !data.Description ||
+                    !data.Priorities) {
+                    return false;
+                }
+
+                return true;
             }
         }]);
-
-
-//•	Add Project
-//o	Route: #/projects/add
-//o	A modal dialog with a form for creating a new project. The form consists of:
-//    	Leader (Drop-down with all available users)
-//	Project Key (Text-box)
-//	Priorities (Text-box)
-//	Label (Text-box, which suggests already created labels by typing a substring. If the label does not exist – creates it)
-//	Name (Text-box)
-//	Description (Textarea)
-//	Create Project (Button)

@@ -2,13 +2,15 @@
 
 angular.module('issueTrackingSystem.home', [
     'ngRoute',
+    'issueTrackingSystem.common.notyService',
     'issueTrackingSystem.users.authentication'])
 
     .controller('HomeController', [
         '$scope',
         '$window',
         'authentication',
-        function($scope, $window , authentication) {
+        'notyService',
+        function($scope, $window , authentication, notyService) {
             $scope.logUser = function (user) {
                 if (user.password.toString().length < 6) {
                     return;
@@ -17,6 +19,7 @@ angular.module('issueTrackingSystem.home', [
                 authentication.loginUser(user)
                     .then(function (loggedUser) {
                         window.location.reload();
+                        notyService.successMessage('You have successfully logged in.');
                     }, function (error) {
                         alert('Login error ' + error);
                         console.log(error);
