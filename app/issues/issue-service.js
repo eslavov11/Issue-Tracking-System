@@ -32,6 +32,35 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
+            // GET] Issues/?pageSize={pageSize}&pageNumber={pageNumber}&{filter}={value}
+            // "http://softuni-issue-tracker.azurewebsites.net/issues/
+            // ?filter=Priority.Name == \"In Progress\" or DueDate.Day == 21&pageSize=2&pageNumber=1"
+            function getIssuesByFilter(userAuth, params) {
+                var deferred = $q.defer();
+
+                // TODO: test
+                //params = params || {};
+                //params.pageSize = params.pageSize || 10;
+                //params.pageNumber = params.pageNumber || 1;
+                //params.filter = 'Project.Id == 1';
+                // **********
+
+                $http.get(BASE_URL + 'issues/?filter=' +
+                    params.filter +
+                    '&pageSize=' +
+                    params.pageSize +
+                    '&pageNumber=' +
+                    params.pageNumber,
+                    userAuth)
+                    .then(function (success) {
+                        deferred.resolve(success);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
+            }
+
             function getUserIssues(userAuth, params) {
                 var deferred = $q.defer();
 
@@ -123,6 +152,7 @@ angular.module('issueTrackingSystem.issues.service', [])
             return {
                 getProjectIssuesById: getProjectIssuesById,
                 getIssueById: getIssueById,
+                getIssuesByFilter: getIssuesByFilter,
                 getUserIssues: getUserIssues,
                 addIssue: addIssue,
                 editIssue: editIssue,

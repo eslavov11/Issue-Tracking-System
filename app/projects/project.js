@@ -10,8 +10,9 @@ angular.module('issueTrackingSystem.projects', [
         '$route',
         '$location',
         'projectService',
+        'issueService',
         'authentication',
-        function($scope, $route, $location, projectService , authentication) {
+        function($scope, $route, $location, projectService, issueService, authentication) {
             var projectId = $route.current.params.id;
 
             projectService.getProjectById(authentication.getAuthHeaders(), projectId)
@@ -37,4 +38,18 @@ angular.module('issueTrackingSystem.projects', [
                 }, function (error) {
                     console.log(error);
                 });
+
+
+            var issuesParams = {
+                pageSize: 10,
+                pageNumber: 1,
+                filter: 'Project.Id == ' + projectId + ' and Assignee.Username == \"' + authentication.getUsername() + '\"'
+            };
+
+            issueService.getIssuesByFilter(authentication.getAuthHeaders(), issuesParams)
+                .then(function (response) {
+                    $scope.issues = response.data.Issues;
+                }, function (error) {
+                    console.log(error);
+                })
         }]);

@@ -71,10 +71,43 @@ form#change-password button {
 }
 /***********************/
 
-/****ISSUE TMPL***********/
-#project-page {
+/****PROJECT TMPL***********/
+#project-wrapper {
   width: 84%;
   margin: 0 auto;
+}
+
+#project-info {
+  vertical-align: top;
+  width: 44%;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+#project-issues {
+  display: inline-block;
+  width: 40%;
+  float: right;
+}
+
+@media only screen and (max-width: 760px) {
+  #project-wrapper {
+    width: 100%;
+    text-align: center;
+  }
+
+  #project-info {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  #project-issues {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
 }
 /***********************/
 
