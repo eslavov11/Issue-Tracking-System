@@ -7,20 +7,19 @@ angular.module('issueTrackingSystem.dashboard', [
         'issueTrackingSystem.projects.service'])
 
     .controller('DashboardController', [
-        '$rootScope',
         '$scope',
         '$location',
         'authentication',
         'issueService',
         'projectService',
         'toastr',
-        function($rootScope, $scope, $location, authentication, issueService, projectService, toastr) {
-            if ($rootScope.userIsRegistrating) {
+        function($scope, $location, authentication, issueService, projectService, toastr) {
+            if (localStorage.userIsRegistrating) {
                 toastr.success('Registered successfully.');
-                $rootScope.userIsLogging = false;
-            } else if ($rootScope.userIsLogging) {
+                delete localStorage.userIsRegistrating;
+            } else if (localStorage.userIsLogging) {
                 toastr.info('Successfully logged in.');
-                $rootScope.userIsRegistrating = false;
+                delete localStorage.userIsLogging;
             }
 
             $scope.username = localStorage.username;

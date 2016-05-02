@@ -22,6 +22,11 @@ angular.module('issueTrackingSystem', [
 ])
     .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push(['$q', 'toastr', function ($q, toastr) {
+            toastr.options = {
+                timeOut: 1000,
+                positionClass: "toast-top-center"
+            };
+
             return {
                 'response': function (response) {
                     return response;

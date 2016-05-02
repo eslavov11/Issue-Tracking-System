@@ -6,13 +6,17 @@ angular.module('issueTrackingSystem.home', [
     'issueTrackingSystem.users.authentication'])
 
     .controller('HomeController', [
-        '$rootScope',
         '$scope',
         '$window',
         'authentication',
         'notyService',
         'toastr',
-        function($rootScope, $scope, $window , authentication, notyService, toastr) {
+        function($scope, $window , authentication, notyService, toastr) {
+            if (localStorage.userIsLoggingOut) {
+                toastr.info('Successfully logged out.');
+                delete localStorage.userIsLoggingOut;
+            }
+
             $scope.user = {};
             $scope.userReg = {};
 
@@ -25,7 +29,7 @@ angular.module('issueTrackingSystem.home', [
 
                 authentication.loginUser(user)
                     .then(function (loggedUser) {
-                        $rootScope.userIsLogging = true;
+                        localStorage.userIsLogging = true;
                         window.location.reload();
                     }, function (error) {
                         console.log(error);
@@ -55,7 +59,7 @@ angular.module('issueTrackingSystem.home', [
 
                         authentication.loginUser(user)
                             .then(function () {
-                                $rootScope.userIsRegistrating = true;
+                                localStorage.userIsRegistrating = true;
                                 window.location.reload();
                             });
                     }, function (error) {

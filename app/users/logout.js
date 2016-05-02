@@ -16,10 +16,8 @@ angular.module('issueTrackingSystem.users.logout', [
                     delete localStorage.userId;
                     delete localStorage.isAdmin;
 
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 500);
-                    toastr.info('Successfully logged out.');
+                    localStorage.userIsLoggingOut = true;
+                    window.location.reload();
                 }, function (error) {
                     console.log(error);
                 });
