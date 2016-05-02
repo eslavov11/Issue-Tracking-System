@@ -20,7 +20,22 @@ angular.module('issueTrackingSystem', [
   'issueTrackingSystem.issues.addIssue',
   'issueTrackingSystem.issues.editIssue'
 ])
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+        $httpProvider.interceptors.push(['$q', 'toastr', function ($q, toastr) {
+            return {
+                'response': function (response) {
+                    return response;
+                },
+                'responseError': function (rejection) {
+                    if (rejection.data && rejection.data.error_description) {
+                        toastr.error(rejection.data.error_description);
+                    }
+
+                    return $q.reject(rejection);
+                }
+            }
+        }]);
+
         $routeProvider.when('/', {
             templateUrl: localStorage.access_token ? 'app/dashboard/dashboard.html' : 'app/home/home.html',
             controller: localStorage.access_token ? 'DashboardController' : 'HomeController',
@@ -107,6 +122,7 @@ angular.module('issueTrackingSystem', [
     }])
 
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
+    .constant('toastr', toastr)
 
     .run(function ($rootScope, $location, authentication) {
         $rootScope.$on('$routeChangeStart', function (event, next) {

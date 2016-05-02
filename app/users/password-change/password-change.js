@@ -8,7 +8,8 @@ angular.module('issueTrackingSystem.users.passwordChange', [
         '$scope',
         '$location',
         'authentication',
-        function($scope, $location , authentication) {
+        'toastr',
+        function($scope, $location , authentication, toastr) {
             $scope.changePasswordData = {};
 
             $scope.changePassword = function () {
@@ -19,9 +20,10 @@ angular.module('issueTrackingSystem.users.passwordChange', [
 
                 authentication.changePassword(changePasswordData)
                     .then(function (success) {
+                        toastr.success('You have successfully changed your password.');
                         $location.path('/');
                     }, function (error) {
-                        alert('Change password error ' + error);
+                        toastr.error('Old password is incorrect.');
                         console.log(error);
                     });
             };
@@ -34,12 +36,10 @@ angular.module('issueTrackingSystem.users.passwordChange', [
                     changePasswordData.ConfirmPassword.length < 6) {
                     return false;
                 } else if (changePasswordData.NewPassword !== changePasswordData.ConfirmPassword) {
-                    // TODO: ERROR
-                    alert('Passwords do not match');
+                    toastr.error('New psswords do not match');
                     return false;
                 } else if (changePasswordData.OldPassword === changePasswordData.NewPassword) {
-                    // TODO: ERROR
-                    alert('Old password cannot be new password... SHOULD I BE HANDLED BEFORE OR AFTER REST??');
+                    toastr.error('Old password cannot be new password.');
                     return false;
                 }
 

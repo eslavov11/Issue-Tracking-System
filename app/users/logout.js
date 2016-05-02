@@ -7,8 +7,8 @@ angular.module('issueTrackingSystem.users.logout', [
         '$scope',
         '$location',
         'authentication',
-        function($scope, $location, authentication) {
-            //TODO: call server
+        'toastr',
+        function($scope, $location, authentication, toastr) {
             authentication.logoutUser({access_token: localStorage.access_token})
                 .then(function () {
                     delete localStorage.access_token;
@@ -16,8 +16,10 @@ angular.module('issueTrackingSystem.users.logout', [
                     delete localStorage.userId;
                     delete localStorage.isAdmin;
 
-                    window.location.reload();
-                    //TODO: notify user
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 500);
+                    toastr.info('Successfully logged out.');
                 }, function (error) {
                     console.log(error);
                 });

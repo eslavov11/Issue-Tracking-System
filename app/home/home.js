@@ -6,43 +6,58 @@ angular.module('issueTrackingSystem.home', [
     'issueTrackingSystem.users.authentication'])
 
     .controller('HomeController', [
+        '$rootScope',
         '$scope',
         '$window',
         'authentication',
         'notyService',
-        function($scope, $window , authentication, notyService) {
-            $scope.logUser = function (user) {
-                if (user.password.toString().length < 6) {
+        'toastr',
+        function($rootScope, $scope, $window , authentication, notyService, toastr) {
+            $scope.user = {};
+            $scope.userReg = {};
+
+            $scope.logUser = function () {
+                var user = $scope.user;
+
+                if (!user.username ||  !user.password || user.password.toString().length < 6) {
                     return;
                 }
 
                 authentication.loginUser(user)
                     .then(function (loggedUser) {
+                        $rootScope.userIsLogging = true;
                         window.location.reload();
-                        notyService.successMessage('You have successfully logged in.');
                     }, function (error) {
-                        alert('Login error ' + error);
                         console.log(error);
                     });
             };
 
-            $scope.registerUser = function (user) {
-                if (user.password.toString().length < 6 || user.confirmPassword.toString().length < 6) {
+            $scope.registerUser = function () {
+                var userReg = $scope.userReg;
+
+                if (!userReg.email ||
+                    !userReg.password ||
+                    !userReg.confirmPassword ||
+                    userReg.password.toString().length < 6 ||
+                    userReg.confirmPassword.toString().length < 6) {
                     return;
-                } else if (user.password.toString() !== user.confirmPassword.toString().length) {
-                    // TODO: NOTY passwordss do not match
-                    alert('Passwords do not match. Try again.');
+                } else if (userReg.password.toString() !== userReg.confirmPassword.toString()) {
+                    toastr.error('Passwords do not match. Try again.');
                     return;
                 }
 
-                authentication.registerUser(user)
-                    .then(function (registeredUser) {
-                        var userData = {
-                            username: user.email,
-                            password: user.password
+                authentication.registerUser(userReg)
+                    .then(function () {
+                        var user = {
+                            username: userReg.email,
+                            password: userReg.password
                         };
 
-                        $scope.logUser(userData);
+                        authentication.loginUser(user)
+                            .then(function () {
+                                $rootScope.userIsRegistrating = true;
+                                window.location.reload();
+                            });
                     }, function (error) {
                         alert('Register error' + error);
                         console.log(error);
