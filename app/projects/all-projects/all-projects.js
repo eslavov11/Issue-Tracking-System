@@ -13,27 +13,40 @@ angular.module('issueTrackingSystem.projects.allProjects', [
         'authentication',
         function($scope, $route, $location, projectService , authentication) {
             var projectId = $route.current.params.id;
+            $scope.filteredProjects = [];
+            $scope.currentPage = 1;
+            $scope.numPerPage = 8;
+            $scope.maxSize = 5;
+            $scope.projectsCount = 0;
 
-            projectService.getAllProjects(authentication.getAuthHeaders())
-                .then(function (response) {
-                    $scope.projects = response.data;
+            $scope.$watch("currentPage + numPerPage", function() {
+                var prParams = {
+                    pageSize: $scope.numPerPage,
+                    pageNumber: $scope.currentPage
+                };
+                projectService.getProjectsPage(authentication.getAuthHeaders(), prParams)
+                    .then(function (response) {
+                        $scope.filteredProjects = response.data.Projects;
+                        $scope.projectsCount = response.data.TotalCount;
+                    }, function (error) {
+                        console.log(error);
+                    });
 
-                    $scope.addProject = function () {
-                        $location.path("projects/add");
-                    };
+            });
 
-                    $scope.editProject = function (id) {
-                        $location.path("projects/" + id + '/edit');
-                    };
+            $scope.addProject = function () {
+                $location.path("projects/add");
+            };
 
-                    $scope.openProject = function (id) {
-                        $location.path("projects/" + id);
-                    };
+            $scope.editProject = function (id) {
+                $location.path("projects/" + id + '/edit');
+            };
 
-                    $scope.addIssue = function (id) {
-                        $location.path("projects/" + id + '/add-issue');
-                    };
-                }, function (error) {
-                    console.log(error);
-                });
+            $scope.openProject = function (id) {
+                $location.path("projects/" + id);
+            };
+
+            $scope.addIssue = function (id) {
+                $location.path("projects/" + id + '/add-issue');
+            };
         }]);

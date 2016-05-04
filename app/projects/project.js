@@ -40,16 +40,33 @@ angular.module('issueTrackingSystem.projects', [
                 });
 
 
-            var issuesParams = {
-                pageSize: 10,
-                pageNumber: 1,
-                filter: 'Project.Id == ' + projectId + ' and Assignee.Username == \"' + authentication.getUsername() + '\"'
-            };
 
-            issueService.getIssuesByFilter(authentication.getAuthHeaders(), issuesParams)
-                .then(function (response) {
-                    $scope.issues = response.data.Issues;
-                }, function (error) {
-                    console.log(error);
-                })
+            $scope.filteredIssues = [];
+            $scope.currentPage = 1;
+            $scope.numPerPage = 2;
+            $scope.maxSize = 5;
+            $scope.issuesCount = 0;
+
+            $scope.$watch("currentPage + numPerPage", function() {
+                var issuesParams = {
+                    pageSize: $scope.numPerPage,
+                    pageNumber: $scope.currentPage,
+                    filter: 'Project.Id == ' + projectId + ' and Assignee.Username == \"' + authentication.getUsername() + '\"'
+                };
+
+                issueService.getIssuesByFilter(authentication.getAuthHeaders(), issuesParams)
+                    .then(function (response) {
+                        $scope.filteredIssues = response.data.Issues;
+                        $scope.issuesCount = response.data.TotalCount;
+                    }, function (error) {
+                        console.log(error);
+                    })
+            });
+
+            //issueService.getIssuesByFilter(authentication.getAuthHeaders(), issuesParams)
+            //    .then(function (response) {
+            //        $scope.issues = response.data.Issues;
+            //    }, function (error) {
+            //        console.log(error);
+            //    })
         }]);

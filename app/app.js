@@ -2,6 +2,7 @@
 
 // Declare app level module which depends on views, and components
 angular.module('issueTrackingSystem', [
+  'ui.bootstrap',
   'ngRoute',
   'ngResource',
   'issueTrackingSystem.directives.focusElement',

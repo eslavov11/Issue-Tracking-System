@@ -340,7 +340,7 @@ html,body{
   padding:0;
 }
 #wrapper{
-  margin-bottom:100px;/* Height of footer*/
+  margin-bottom:50px;/* Height of footer*/
 }
 #app-footer {
   position: absolute;
@@ -351,3 +351,15 @@ html,body{
   /*background:#ccc;*/
 }
 /*****************/
+
+/****PAGINATION******/
+#user-issues > ul {
+  float:right;
+  margin: 0;
+}
+
+#projects-table > ul {
+  float:right;
+  margin: 0;
+}
+/********************/

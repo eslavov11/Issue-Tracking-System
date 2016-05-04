@@ -22,7 +22,7 @@
                     <th>Project</th>
                     <th></th>
                 </tr>
-                <tr ng-repeat="i in issues  | orderBy:predicate:reverse">
+                <tr ng-repeat="i in filteredIssues  | orderBy:predicate:reverse">
                     <td>{{i.Id}}</td>
                     <td>{{i.Title}}</td>
                     <td>{{i.DueDate  | date:'dd-MM-yyyy'}}</td>
@@ -39,6 +39,14 @@
 
         <button id="new-project" ng-show="isAdmin" ng-click="addNewProject()" class="btn btn-primary">Add new project</button>
         <button id="all-projects" ng-show="isAdmin" ng-click="listAllProjects()" class="btn btn-primary">All projects</button>
+
+        <pagination
+                ng-model="currentPage"
+                total-items="issuesCount"
+                items-per-page="numPerPage"
+                max-size="maxSize"
+                boundary-links="true">
+        </pagination>
     </section>
 
     <aside id="associated-projects">

@@ -62,7 +62,7 @@
                 <th>Due date</th>
                 <th>Assignee</th>
             </tr>
-            <tr ng-repeat="i in issues">
+            <tr ng-repeat="i in filteredIssues">
                 <td>
                     <a href="#/issues/{{i.Id}}">{{i.Title}}</a>
                 </td>
@@ -72,7 +72,15 @@
             </tr>
         </table>
 
-        <div ng-if="issues.length == 0" style="text-align: center;">No Issues</div>
+        <div ng-if="issuesCount == 0" style="text-align: center;">No Issues</div>
+
+        <pagination
+                ng-model="currentPage"
+                total-items="issuesCount"
+                items-per-page="numPerPage"
+                max-size="maxSize"
+                boundary-links="true">
+        </pagination>
     </section>
 </main>
 

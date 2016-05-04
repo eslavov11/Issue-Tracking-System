@@ -1,10 +1,6 @@
 <section id="projects-table" >
     <h1>List of all projects</h1>
 
-    <div>
-        <a ng-click="addProject()">Add new project</a>
-    </div>
-
     <table class="table">
         <tr>
             <th>#</th>
@@ -12,7 +8,7 @@
             <th>Leader</th>
             <th></th>
         </tr>
-        <tr ng-repeat="p in projects">
+        <tr ng-repeat="p in filteredProjects">
             <td>{{p.Id}}</td>
             <td>{{p.Name}}</td>
             <td>{{p.Lead.Username}}</td>
@@ -23,4 +19,14 @@
             </td>
         </tr>
     </table>
+
+    <button id="new-project" ng-click="addProject()" class="btn btn-primary">Add new project</button>
+
+    <pagination
+            ng-model="currentPage"
+            total-items="projectsCount"
+            items-per-page="numPerPage"
+            max-size="maxSize"
+            boundary-links="true">
+    </pagination>
 </section>
