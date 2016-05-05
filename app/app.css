@@ -1,7 +1,8 @@
 /* app css stylesheet */
 
 body {
-  background: lightsalmon;
+  /*background: lightsalmon;*/
+  background: #fff;
 }
 
 #wrapper {
@@ -363,3 +364,27 @@ html,body{
   margin: 0;
 }
 /********************/
+
+/*NAVBAR-MENU******/
+#navbar-main > ul > li :hover {
+  font-weight: 700;
+  background: #337ab7;
+  color: white;
+}
+
+@media only screen and (max-width: 777px) {
+  #navbar-main {
+    display: block;
+  }
+
+  #navbar-main ul li {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+
+}
+/*****************/
+
+

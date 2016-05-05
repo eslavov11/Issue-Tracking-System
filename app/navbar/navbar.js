@@ -13,4 +13,6 @@ angular.module('issueTrackingSystem.navbar', [
             $scope.username = localStorage.username;
 
             $scope.isAdmin = authentication.isAdmin();
+
+            $scope.showMinMenu = false;
         }]);
