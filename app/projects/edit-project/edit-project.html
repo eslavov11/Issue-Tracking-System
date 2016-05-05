@@ -10,7 +10,8 @@
 
     <label for="select-leader">Select leader</label>
     <div>
-        <select id="select-leader" ng-model="projectData.Leader" data-ng-options="u.Username for u in users" class="form-control" required>
+        <select id="select-leader" ng-disabled="!isAdmin" ng-model="projectData.Leader" data-ng-options="u.Username for u in users"
+                class="form-control" required>
         </select>
     </div>
 

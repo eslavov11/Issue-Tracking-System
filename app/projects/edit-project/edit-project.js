@@ -13,6 +13,7 @@ angular.module('issueTrackingSystem.projects.editProject', [
         'authentication',
         function($scope, $location, $route, projectService , authentication) {
             $scope.contentLoaded = false;
+            $scope.isAdmin = authentication.isAdmin();
 
             authentication.getAllUsers()
                 .then(function (users) {
@@ -30,7 +31,8 @@ angular.module('issueTrackingSystem.projects.editProject', [
             projectService.getProjectById(authentication.getAuthHeaders(), $route.current.params.id)
                 .then(function (response) {
                     // redirecting to home if user is not project leader
-                    if (response.data.Lead.Id !== authentication.getUserId()) {
+                    if (response.data.Lead.Id !== authentication.getUserId() &&
+                     !$scope.isAdmin) {
                         $location.path("/");
                     }
 
@@ -82,7 +84,6 @@ angular.module('issueTrackingSystem.projects.editProject', [
 
                 projectService.editProject(authentication.getAuthHeaders(), requestData)
                     .then(function (success) {
-                        console.log(success);
                         $location.path("projects/" + success.data.Id);
                     }, function (error) {
                         console.log(error);

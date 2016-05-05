@@ -2,16 +2,14 @@
 
 angular.module('issueTrackingSystem.home', [
     'ngRoute',
-    'issueTrackingSystem.common.notyService',
     'issueTrackingSystem.users.authentication'])
 
     .controller('HomeController', [
         '$scope',
         '$window',
         'authentication',
-        'notyService',
         'toastr',
-        function($scope, $window , authentication, notyService, toastr) {
+        function($scope, $window , authentication, toastr) {
             if (localStorage.userIsLoggingOut) {
                 toastr.info('Successfully logged out.');
                 delete localStorage.userIsLoggingOut;

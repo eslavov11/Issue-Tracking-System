@@ -2,7 +2,8 @@
 
 body {
   /*background: lightsalmon;*/
-  background: #fff;
+  background: #fafafa;
+  color:#111;
 }
 
 #wrapper {
@@ -89,26 +90,6 @@ form#change-password button {
   display: inline-block;
   width: 40%;
   float: right;
-}
-
-@media only screen and (max-width: 760px) {
-  #project-wrapper {
-    width: 100%;
-    text-align: center;
-  }
-
-  #project-info {
-    margin: 0 auto;
-    display: block;
-    width: 100%;
-    margin-bottom: 50px;
-  }
-
-  #project-issues {
-    width: 100%;
-    margin: 0 auto;
-    display: block;
-  }
 }
 /***********************/
 
@@ -372,18 +353,12 @@ html,body{
   color: white;
 }
 
-@media only screen and (max-width: 777px) {
-  #navbar-main {
-    display: block;
-  }
+body > div:nth-child(1) > div {
+  background-color: #060606;
+}
 
-  #navbar-main ul li {
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid #e7e7e7;
-  }
-
-
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover  {
+  color:#777;
 }
 /*****************/
 

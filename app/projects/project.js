@@ -18,6 +18,7 @@ angular.module('issueTrackingSystem.projects', [
             projectService.getProjectById(authentication.getAuthHeaders(), projectId)
                 .then(function (project) {
                     $scope.isLeader = project.data.Lead.Username === authentication.getUsername();
+                    $scope.isAdmin = authentication.isAdmin();
 
                     $scope.project = project.data;
                     $scope.prioritiesString = $scope.project.Priorities.map(function(pr){

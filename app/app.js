@@ -1,12 +1,10 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
 angular.module('issueTrackingSystem', [
   'ui.bootstrap',
   'ngRoute',
   'ngResource',
   'issueTrackingSystem.directives.focusElement',
-  'issueTrackingSystem.common.notyService',
   'issueTrackingSystem.navbar',
   'issueTrackingSystem.home',
   'issueTrackingSystem.dashboard',

@@ -47,8 +47,8 @@
             </dd>
         </dl>
 
-        <button ng-show="isLeader" class="btn btn-primary" ng-click="editProject()">Edit</button>
-        <button ng-show="isLeader" class="btn btn-primary" ng-click="addIssue()">Add issue</button>
+        <button ng-show="isLeader || isAdmin" class="btn btn-primary" ng-click="editProject()">Edit</button>
+        <button ng-show="isLeader || isAdmin" class="btn btn-primary" ng-click="addIssue()">Add issue</button>
     </section>
 
     <section id="project-issues">
