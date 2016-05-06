@@ -13,7 +13,8 @@ angular.module('issueTrackingSystem.issues.editIssue', [
         'projectService',
         'issueService',
         'authentication',
-        function($scope, $location, $route, projectService, issueService, authentication) {
+        'toastr',
+        function($scope, $location, $route, projectService, issueService, authentication, toastr) {
             $scope.contentLoaded = false;
 
             issueService.getIssueById($route.current.params.id)
@@ -113,11 +114,11 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                 
                 $scope.changeStatus = function (statusId) {
                     issueService.editIssueStatus($scope.issueData.Id,statusId)
-                        .then(function (response) {
-                            // TODO: add notification for changing status!!!!!
-                            console.log(response);
+                        .then(function () {
+                            toastr.info('Status changed');
                             $route.reload();
                         }, function (error) {
+                            toastr.error('Error changing status');
                             console.log(error);
                         })
                 }

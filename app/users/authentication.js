@@ -9,7 +9,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             function getAllUsers() {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Users/', getAuthHeaders())
+                $http.get(BASE_URL + 'Users/')
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -22,7 +22,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             function getUsersByFilter(filter) {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Users/?filter=Username.Contains(\"' + filter + '\")', getAuthHeaders())
+                $http.get(BASE_URL + 'Users/?filter=Username.Contains(\"' + filter + '\")')
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -46,7 +46,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                             }
                         };
 
-                        $http.defaults.headers.common.Authorization = 'Bearer' + successData.data.accessToken;
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + successData.data.accessToken;
 
                         $http.get(BASE_URL + 'users/me', headers)
                             .then(function (personalData) {
@@ -85,8 +85,9 @@ angular.module('issueTrackingSystem.users.authentication', [])
             function logoutUser() {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'api/Account/Logout',{} , getAuthHeaders())
+                $http.post(BASE_URL + 'api/Account/Logout',{})
                     .then(function (success) {
+                        delete $http.defaults.headers.common.Authorization;
                         deferred.resolve(success);
                     }, function (error) {
                         deferred.reject(error);
@@ -98,7 +99,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             function changePassword(passwordData) {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'api/Account/ChangePassword',passwordData , getAuthHeaders())
+                $http.post(BASE_URL + 'api/Account/ChangePassword',passwordData)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -106,6 +107,12 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     });
 
                 return deferred.promise;
+            }
+
+            function refreshToken() {
+                if (localStorage.access_token) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.access_token;
+                }
             }
 
             function isLoggedIn() {
@@ -131,6 +138,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 registerUser: registerUser,
                 logoutUser: logoutUser,
                 changePassword: changePassword,
+                refreshToken: refreshToken,
                 isLoggedIn: isLoggedIn,
                 isAdmin: isAdmin,
                 getUsername: getUsername,

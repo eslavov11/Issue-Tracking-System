@@ -19,7 +19,7 @@ angular.module('issueTrackingSystem.users.passwordChange', [
                 }
 
                 authentication.changePassword(changePasswordData)
-                    .then(function (success) {
+                    .then(function () {
                         toastr.success('You have successfully changed your password.');
                         $location.path('/');
                     }, function (error) {

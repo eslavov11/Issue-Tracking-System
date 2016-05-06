@@ -20,7 +20,6 @@
 }
 
 /*****NAVBAR-MENU******/
-
 @media only screen and (max-width: 767px) {
     #navbar-main {
         display: block;
@@ -37,7 +36,5 @@
     body > div:nth-child(1) > div > div > div.navbar-header {
         border-bottom: none;
     }
-
-
 }
 /******************************/

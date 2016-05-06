@@ -20,7 +20,6 @@ angular.module('issueTrackingSystem.projects.service', [])
             }
 
             function getProjectsForUser(params) {
-                //projects?filter=Lead.Id=\"77dc87c7-150a-4148-b71c-f3fb1be7b2ce\"&pageSize=4&pageNumber=1"
                 var deferred = $q.defer();
 
                 $http.get(BASE_URL +
@@ -53,7 +52,6 @@ angular.module('issueTrackingSystem.projects.service', [])
             }
 
             function getProjectsPage(params) {
-                //projects?filter=&pageSize=4&pageNumber=1"
                 var deferred = $q.defer();
 
                 $http.get(BASE_URL +

@@ -10,9 +10,7 @@ angular.module('issueTrackingSystem.projects.allProjects', [
         '$route',
         '$location',
         'projectService',
-        'authentication',
-        function($scope, $route, $location, projectService , authentication) {
-            var projectId = $route.current.params.id;
+        function($scope, $route, $location, projectService) {
             $scope.filteredProjects = [];
             $scope.currentPage = 1;
             $scope.numPerPage = 8;

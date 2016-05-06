@@ -3,51 +3,25 @@
     <hr/>
 
     <dl class="dl-horizontal">
-        <dt>
-            Title
-        </dt>
-        <dd>
-            {{issue.Title}}
-        </dd>
+        <dt>Title</dt>
+        <dd>{{issue.Title}}</dd>
 
-        <dt>
-            Description
-        </dt>
-        <dd>
-            {{issue.Description}}
-        </dd>
+        <dt>Description</dt>
+        <dd>{{issue.Description}}</dd>
 
-        <dt>
-            Assignee
-        </dt>
-        <dd>
-            {{issue.Assignee.Username}}
-        </dd>
+        <dt>Assignee </dt>
+        <dd>{{issue.Assignee.Username}}</dd>
 
-        <dt>
-            Project
-        </dt>
-        <dd>
-            <a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a>
-        </dd>
+        <dt>Project</dt>
+        <dd><a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></dd>
 
-        <dt>
-            Due date
-        </dt>
-        <dd>
-            {{issue.DueDate | date:'dd/MM/yyyy'}}
-        </dd>
+        <dt>Due date</dt>
+        <dd>{{issue.DueDate | date:'dd/MM/yyyy'}}</dd>
 
-        <dt>
-            Status
-        </dt>
-        <dd>
-            {{issue.Status.Name}}
-        </dd>
+        <dt>Status</dt>
+        <dd>{{issue.Status.Name}}</dd>
 
-        <dt>
-            Labels
-        </dt>
+        <dt>Labels</dt>
         <dd>
             <ul>
                 <li ng-repeat="l in issue.Labels">{{l.Name}}</li>

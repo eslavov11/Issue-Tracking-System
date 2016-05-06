@@ -3,11 +3,6 @@
 
     <section id="user-issues" >
             <h3>List of all {{username}} issues</h3>
-
-            <!--<div>-->
-            <!--<a ng-click="addProject()">Add new project</a>-->
-            <!--</div>-->
-
             <table class="table">
                 <tr>
                     <th class="table-column" ng-click="order('Id')">
@@ -60,19 +55,6 @@
             </li>
             <div ng-if="projects.length == 0 && issueProjects.length == 0" style="text-align: center;">No projects</div>
         </ul>
-
-        <!--<table class="table">-->
-            <!--<tr ng-repeat="p in projects">-->
-                <!--<td>-->
-                    <!--<a href="#/projects/{{p.Id}}">{{p.Name}}</a>-->
-                <!--</td>-->
-            <!--</tr>-->
-            <!--<tr ng-repeat="project in issueProjects">-->
-                <!--<td>-->
-                    <!--<a href="#/projects/{{project.Id}}">{{project.Name}}</a>-->
-                <!--</td>-->
-            <!--</tr>-->
-
             <div ng-if="projects.length == 0 && issueProjects.length == 0" style="text-align: center;">No projects</div>
         </table>
     </aside>

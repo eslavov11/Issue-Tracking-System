@@ -54,9 +54,3 @@ angular.module('issueTrackingSystem.issues', [
                     });
             }
         }]);
-
-//•	Issue page
-//o	Route: #/issues/:id
-//o	Displays the information about the issue
-//o	If the user is the assignee, they can see a button for changing the status using an available status (e.g. Open -> Closed).
-//    o	If the user is the issue’s project leader they can see the edit issue button.

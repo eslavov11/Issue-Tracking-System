@@ -15,7 +15,6 @@ angular.module('issueTrackingSystem.users.logout', [
                     delete localStorage.username;
                     delete localStorage.userId;
                     delete localStorage.isAdmin;
-                    delete $http.defaults.headers.common.Authorization;
 
                     localStorage.userIsLoggingOut = true;
                     window.location.reload();

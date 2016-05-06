@@ -6,18 +6,21 @@
         <input ng-model="issueData.Title" id="name" type="text" class="form-control" placeholder="Issue title..." required>
 
         <label for="description">Description</label>
-    <textarea ng-model="issueData.Description" name="" id="description" class="form-control" placeholder="Edit issue description..." required>
-    </textarea>
+        <textarea ng-model="issueData.Description" name="" id="description" class="form-control"
+                  placeholder="Edit issue description..." required>
+        </textarea>
 
         <label for="select-leader">Select assignee</label>
         <div>
-            <select id="select-leader" ng-options="u.Username for u in users" ng-model="issueData.Assignee" class="form-control" required>
+            <select id="select-leader" ng-options="u.Username for u in users"
+                    ng-model="issueData.Assignee" class="form-control" required>
             </select>
         </div>
 
         <label for="select-project">Select project</label>
         <div>
-            <select id="select-project" ng-options="p.Name for p in projects" ng-model="issueData.Project" class="form-control" required>
+            <select id="select-project" ng-options="p.Name for p in projects" ng-model="issueData.Project"
+                    class="form-control" required>
             </select>
         </div>
 

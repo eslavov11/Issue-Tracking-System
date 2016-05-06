@@ -45,7 +45,6 @@ angular.module('issueTrackingSystem.projects', [
             $scope.numPerPage = 2;
             $scope.maxSize = 5;
             $scope.issuesCount = 0;
-
             $scope.$watch("currentPage + numPerPage", function() {
                 var issuesParams = {
                     pageSize: $scope.numPerPage,

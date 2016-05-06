@@ -4,47 +4,23 @@
         <hr/>
 
         <dl class="dl-horizontal">
-            <dt>
-                Name
-            </dt>
-            <dd>
-                {{project.Name}}
-            </dd>
+            <dt>Name</dt>
+            <dd>{{project.Name}}</dd>
 
-            <dt>
-                Project key
-            </dt>
-            <dd>
-                {{project.ProjectKey}}
-            </dd>
+            <dt>Project key</dt>
+            <dd>{{project.ProjectKey}}</dd>
 
-            <dt>
-                Description
-            </dt>
-            <dd>
-                {{project.Description}}
-            </dd>
+            <dt>Description</dt>
+            <dd>{{project.Description}}</dd>
 
-            <dt>
-                Leader
-            </dt>
-            <dd>
-                {{project.Lead.Username}}
-            </dd>
+            <dt>Leader</dt>
+            <dd>{{project.Lead.Username}}</dd>
 
-            <dt>
-                Priorities
-            </dt>
-            <dd>
-                {{prioritiesString}}
-            </dd>
+            <dt>Priorities</dt>
+            <dd>{{prioritiesString}}</dd>
 
-            <dt>
-                Labels
-            </dt>
-            <dd>
-                {{labelsString}}
-            </dd>
+            <dt>Labels</dt>
+            <dd>{{labelsString}}</dd>
         </dl>
 
         <button ng-show="isLeader || isAdmin" class="btn btn-primary" ng-click="editProject()">Edit</button>

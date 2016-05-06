@@ -97,15 +97,12 @@ angular.module('issueTrackingSystem.dashboard', [
             $scope.numPerPage = 8;
             $scope.maxSize = 5;
             $scope.issuesCount = 0;
-
             $scope.$watch("currentPage + numPerPage", function() {
-
                 var isParams = {
                     pageSize: $scope.numPerPage,
                     pageNumber: $scope.currentPage,
                     orderBy: 'DueDate desc'
                 };
-                //$scope.filteredTodos = $scope.issues.slice(begin, end);
                 issueService.getUserIssues(isParams)
                     .then(function (response) {
                         $scope.filteredIssues = response.data.Issues;

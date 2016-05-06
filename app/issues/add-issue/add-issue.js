@@ -100,7 +100,7 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                 $scope.labels = [];
 
                 $scope.labelSelected = true;
-            }
+            };
 
             $scope.getUsersByFilter = function() {
                 var stringFilter = $scope.issueData.Assignee;
@@ -124,7 +124,7 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                 $scope.filteredUsers = [];
 
                 $scope.userSelected = true;
-            }
+            };
 
             function validateData() {
                 var data = $scope.issueData || {};

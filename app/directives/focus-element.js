@@ -4,7 +4,6 @@ angular.module('issueTrackingSystem.directives.focusElement', [])
 
     .directive('focusElement', function($timeout, $parse) {
         return {
-            //scope: true,   // optionally create a child scope
             link: function(scope, element, attrs) {
                 var model = $parse(attrs.focusElement);
                 scope.$watch(model, function(value) {

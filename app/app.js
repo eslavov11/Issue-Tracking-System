@@ -129,6 +129,8 @@ angular.module('issueTrackingSystem', [
     .constant('toastr', toastr)
 
     .run(function ($rootScope, $location, authentication) {
+        authentication.refreshToken();
+
         $rootScope.$on('$routeChangeStart', function (event, next) {
             if (!authentication.isLoggedIn() && next.access.requiresLogin) {
                 $location.path('/');
