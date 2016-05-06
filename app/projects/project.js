@@ -15,7 +15,7 @@ angular.module('issueTrackingSystem.projects', [
         function($scope, $route, $location, projectService, issueService, authentication) {
             var projectId = $route.current.params.id;
 
-            projectService.getProjectById(authentication.getAuthHeaders(), projectId)
+            projectService.getProjectById(projectId)
                 .then(function (project) {
                     $scope.isLeader = project.data.Lead.Username === authentication.getUsername();
                     $scope.isAdmin = authentication.isAdmin();
@@ -40,8 +40,6 @@ angular.module('issueTrackingSystem.projects', [
                     console.log(error);
                 });
 
-
-
             $scope.filteredIssues = [];
             $scope.currentPage = 1;
             $scope.numPerPage = 2;
@@ -55,7 +53,7 @@ angular.module('issueTrackingSystem.projects', [
                     filter: 'Project.Id == ' + projectId + ' and Assignee.Username == \"' + authentication.getUsername() + '\"'
                 };
 
-                issueService.getIssuesByFilter(authentication.getAuthHeaders(), issuesParams)
+                issueService.getIssuesByFilter(issuesParams)
                     .then(function (response) {
                         $scope.filteredIssues = response.data.Issues;
                         $scope.issuesCount = response.data.TotalCount;
@@ -63,11 +61,4 @@ angular.module('issueTrackingSystem.projects', [
                         console.log(error);
                     })
             });
-
-            //issueService.getIssuesByFilter(authentication.getAuthHeaders(), issuesParams)
-            //    .then(function (response) {
-            //        $scope.issues = response.data.Issues;
-            //    }, function (error) {
-            //        console.log(error);
-            //    })
         }]);

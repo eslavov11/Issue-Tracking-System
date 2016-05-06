@@ -28,7 +28,7 @@ angular.module('issueTrackingSystem.projects.editProject', [
                     console.log(error);
                 });
 
-            projectService.getProjectById(authentication.getAuthHeaders(), $route.current.params.id)
+            projectService.getProjectById($route.current.params.id)
                 .then(function (response) {
                     // redirecting to home if user is not project leader
                     if (response.data.Lead.Id !== authentication.getUserId() &&
@@ -82,7 +82,7 @@ angular.module('issueTrackingSystem.projects.editProject', [
                     }
                 });
 
-                projectService.editProject(authentication.getAuthHeaders(), requestData)
+                projectService.editProject(requestData)
                     .then(function (success) {
                         $location.path("projects/" + success.data.Id);
                     }, function (error) {

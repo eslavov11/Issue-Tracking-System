@@ -46,6 +46,8 @@ angular.module('issueTrackingSystem.users.authentication', [])
                             }
                         };
 
+                        $http.defaults.headers.common.Authorization = 'Bearer' + successData.data.accessToken;
+
                         $http.get(BASE_URL + 'users/me', headers)
                             .then(function (personalData) {
                                 successData.isAdmin = personalData.data.isAdmin;
@@ -106,23 +108,6 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 return deferred.promise;
             }
 
-            function getAuthHeaders() {
-                var headers = {};
-                var currentUser = {
-                    access_token: localStorage.access_token
-                };
-
-                if (currentUser) {
-                    headers = {
-                        headers: {
-                            Authorization: 'Bearer ' + currentUser.access_token
-                        }
-                    };
-                }
-
-                return headers;
-            }
-
             function isLoggedIn() {
                 return !!localStorage.access_token;
             }
@@ -146,7 +131,6 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 registerUser: registerUser,
                 logoutUser: logoutUser,
                 changePassword: changePassword,
-                getAuthHeaders: getAuthHeaders,
                 isLoggedIn: isLoggedIn,
                 isAdmin: isAdmin,
                 getUsername: getUsername,

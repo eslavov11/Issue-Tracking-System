@@ -16,7 +16,7 @@ angular.module('issueTrackingSystem.issues.editIssue', [
         function($scope, $location, $route, projectService, issueService, authentication) {
             $scope.contentLoaded = false;
 
-            issueService.getIssueById(authentication.getAuthHeaders(), $route.current.params.id)
+            issueService.getIssueById($route.current.params.id)
                 .then(function (response) {
                     // redirecting to home if user is not lead or assignee
                     if (response.data.Author.Id !== authentication.getUserId() &&
@@ -54,7 +54,7 @@ angular.module('issueTrackingSystem.issues.editIssue', [
             }
 
             function getProjects() {
-                projectService.getAllProjects(authentication.getAuthHeaders())
+                projectService.getAllProjects()
                     .then(function (projects) {
                         $scope.projects = projects.data.sort(function(a, b) {
                             return a.Name.localeCompare(b.Name);
@@ -103,7 +103,7 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                         }
                     });
 
-                    issueService.editIssue(authentication.getAuthHeaders(), requestData)
+                    issueService.editIssue(requestData)
                         .then(function (success) {
                             $location.path("issues/" + success.data.Id);
                         }, function (error) {
@@ -112,7 +112,7 @@ angular.module('issueTrackingSystem.issues.editIssue', [
                 };
                 
                 $scope.changeStatus = function (statusId) {
-                    issueService.editIssueStatus(authentication.getAuthHeaders(), $scope.issueData.Id,statusId)
+                    issueService.editIssueStatus($scope.issueData.Id,statusId)
                         .then(function (response) {
                             // TODO: add notification for changing status!!!!!
                             console.log(response);

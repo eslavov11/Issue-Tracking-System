@@ -24,7 +24,7 @@ angular.module('issueTrackingSystem.projects.allProjects', [
                     pageSize: $scope.numPerPage,
                     pageNumber: $scope.currentPage
                 };
-                projectService.getProjectsPage(authentication.getAuthHeaders(), prParams)
+                projectService.getProjectsPage(prParams)
                     .then(function (response) {
                         $scope.filteredProjects = response.data.Projects;
                         $scope.projectsCount = response.data.TotalCount;

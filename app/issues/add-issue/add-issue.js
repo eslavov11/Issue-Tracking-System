@@ -24,7 +24,7 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                     console.log(error);
                 });
 
-            projectService.getAllProjects(authentication.getAuthHeaders())
+            projectService.getAllProjects()
                 .then(function (projects) {
                     $scope.projects = projects.data.sort(function(a, b) {
                         return a.Name.localeCompare(b.Name);
@@ -59,7 +59,7 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                     }
                 });
 
-                issueService.addIssue(authentication.getAuthHeaders(), requestData)
+                issueService.addIssue(requestData)
                     .then(function (success) {
                         console.log(success);
                         $location.path("issues/" + success.data.Id);
@@ -75,7 +75,7 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                     var lastFilter = allFilters[allFilters.length - 1].trim();
 
                     if (lastFilter.length >= 2) {
-                        labelService.getLabels(authentication.getAuthHeaders(), lastFilter)
+                        labelService.getLabels(lastFilter)
                             .then(function success(response) {
                                 $scope.labels = response.data;
                             }, function error(err) {

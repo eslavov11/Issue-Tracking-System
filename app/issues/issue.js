@@ -14,7 +14,7 @@ angular.module('issueTrackingSystem.issues', [
         function($scope, $route, $location, issueService , authentication) {
             var issueId = $route.current.params.id;
 
-            issueService.getIssueById(authentication.getAuthHeaders(), issueId)
+            issueService.getIssueById(issueId)
                 .then(function (response) {
                     $scope.isAssignee = response.data.Assignee.Username === authentication.getUsername();
                     $scope.isLeader = response.data.Author.Username === authentication.getUsername();
@@ -28,7 +28,7 @@ angular.module('issueTrackingSystem.issues', [
                     console.log(error);
                 });
 
-            issueService.getIssueCommentsById(authentication.getAuthHeaders(), issueId)
+            issueService.getIssueCommentsById(issueId)
                 .then(function (response) {
                     $scope.comments = response.data;
                     console.log($scope.comments);
@@ -45,7 +45,7 @@ angular.module('issueTrackingSystem.issues', [
                     Text: $scope.commentText
                 };
 
-                issueService.addIssueComment(authentication.getAuthHeaders(), issueId, comment)
+                issueService.addIssueComment(issueId, comment)
                     .then(function (response) {
                         $scope.comments = response.data;
                         $scope.commentText = '';

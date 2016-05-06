@@ -6,10 +6,10 @@ angular.module('issueTrackingSystem.projects.service', [])
         '$q',
         'BASE_URL',
         function ($http, $q, BASE_URL) {
-            function getProjectById(userAuth, id) {
+            function getProjectById(id) {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Projects/' + id, userAuth)
+                $http.get(BASE_URL + 'Projects/' + id)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -19,7 +19,7 @@ angular.module('issueTrackingSystem.projects.service', [])
                 return deferred.promise;
             }
 
-            function getProjectsForUser(userAuth, params) {
+            function getProjectsForUser(params) {
                 //projects?filter=Lead.Id=\"77dc87c7-150a-4148-b71c-f3fb1be7b2ce\"&pageSize=4&pageNumber=1"
                 var deferred = $q.defer();
 
@@ -29,7 +29,7 @@ angular.module('issueTrackingSystem.projects.service', [])
                     '\"&pageSize=' +
                     params.pageSize +
                     '&pageNumber=' +
-                    params.pageNumber, userAuth)
+                    params.pageNumber)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -39,10 +39,10 @@ angular.module('issueTrackingSystem.projects.service', [])
                 return deferred.promise;
             }
 
-            function getAllProjects(userAuth) {
+            function getAllProjects() {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Projects/', userAuth)
+                $http.get(BASE_URL + 'Projects/')
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -52,7 +52,7 @@ angular.module('issueTrackingSystem.projects.service', [])
                 return deferred.promise;
             }
 
-            function getProjectsPage(userAuth, params) {
+            function getProjectsPage(params) {
                 //projects?filter=&pageSize=4&pageNumber=1"
                 var deferred = $q.defer();
 
@@ -60,7 +60,7 @@ angular.module('issueTrackingSystem.projects.service', [])
                         'Projects/?filter=&pageSize=' +
                         params.pageSize +
                         '&pageNumber=' +
-                        params.pageNumber, userAuth)
+                        params.pageNumber)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -71,10 +71,10 @@ angular.module('issueTrackingSystem.projects.service', [])
             }
 
 
-            function addProject(userAuth, projectData) {
+            function addProject(projectData) {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'Projects/', projectData, userAuth)
+                $http.post(BASE_URL + 'Projects/', projectData)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -84,10 +84,10 @@ angular.module('issueTrackingSystem.projects.service', [])
                 return deferred.promise;
             }
 
-            function editProject(userAuth, projectData) {
+            function editProject(projectData) {
                 var deferred = $q.defer();
 
-                $http.put(BASE_URL + 'Projects/' + projectData.Id, projectData, userAuth)
+                $http.put(BASE_URL + 'Projects/' + projectData.Id, projectData)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {

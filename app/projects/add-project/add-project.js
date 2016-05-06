@@ -53,7 +53,7 @@ angular.module('issueTrackingSystem.projects.addProject', [
                     }
                 });
 
-                projectService.addProject(authentication.getAuthHeaders(), requestData)
+                projectService.addProject(requestData)
                     .then(function (success) {
                         console.log(success);
                         $location.path("projects/" + success.data.Id);
@@ -69,7 +69,7 @@ angular.module('issueTrackingSystem.projects.addProject', [
                     var lastFilter = allFilters[allFilters.length - 1].trim();
 
                     if (lastFilter.length >= 2) {
-                        labelService.getLabels(authentication.getAuthHeaders(), lastFilter)
+                        labelService.getLabels(lastFilter)
                             .then(function success(response) {
                                 $scope.labels = response.data;
                             }, function error(err) {

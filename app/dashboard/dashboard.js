@@ -58,7 +58,7 @@ angular.module('issueTrackingSystem.dashboard', [
                 leadId: authentication.getUserId()
             };
 
-            issueService.getUserIssues(authentication.getAuthHeaders(), issuesParams)
+            issueService.getUserIssues(issuesParams)
                 .then(function (issues) {
                     var issueProjects = [];
 
@@ -73,7 +73,7 @@ angular.module('issueTrackingSystem.dashboard', [
                     console.log(error);
                 });
 
-            projectService.getProjectsForUser(authentication.getAuthHeaders(), projectsParams)
+            projectService.getProjectsForUser(projectsParams)
                 .then(function (response) {
                     $scope.projects = response.data.Projects;
                 }, function (error) {
@@ -106,7 +106,7 @@ angular.module('issueTrackingSystem.dashboard', [
                     orderBy: 'DueDate desc'
                 };
                 //$scope.filteredTodos = $scope.issues.slice(begin, end);
-                issueService.getUserIssues(authentication.getAuthHeaders(), isParams)
+                issueService.getUserIssues(isParams)
                     .then(function (response) {
                         $scope.filteredIssues = response.data.Issues;
                         $scope.issuesCount = response.data.TotalCount;

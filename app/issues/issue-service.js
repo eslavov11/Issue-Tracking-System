@@ -6,10 +6,10 @@ angular.module('issueTrackingSystem.issues.service', [])
         '$q',
         'BASE_URL',
         function ($http, $q, BASE_URL) {
-            function getProjectIssuesById(userAuth, id) {
+            function getProjectIssuesById(id) {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Projects/' + id + '/Issues', userAuth)
+                $http.get(BASE_URL + 'Projects/' + id + '/Issues')
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -19,10 +19,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function getIssueById(userAuth, id) {
+            function getIssueById(id) {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Issues/' + id, userAuth)
+                $http.get(BASE_URL + 'Issues/' + id)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -35,7 +35,7 @@ angular.module('issueTrackingSystem.issues.service', [])
             // GET] Issues/?pageSize={pageSize}&pageNumber={pageNumber}&{filter}={value}
             // "http://softuni-issue-tracker.azurewebsites.net/issues/
             // ?filter=Priority.Name == \"In Progress\" or DueDate.Day == 21&pageSize=2&pageNumber=1"
-            function getIssuesByFilter(userAuth, params) {
+            function getIssuesByFilter(params) {
                 var deferred = $q.defer();
 
                 // TODO: test
@@ -50,8 +50,7 @@ angular.module('issueTrackingSystem.issues.service', [])
                     '&pageSize=' +
                     params.pageSize +
                     '&pageNumber=' +
-                    params.pageNumber,
-                    userAuth)
+                    params.pageNumber)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -61,7 +60,7 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function getUserIssues(userAuth, params) {
+            function getUserIssues(params) {
                 var deferred = $q.defer();
 
                 // TODO: test
@@ -73,8 +72,7 @@ angular.module('issueTrackingSystem.issues.service', [])
 
                 $http.get(BASE_URL + 'issues/me?orderBy=' + params.orderBy +
                         '&pageSize=' + params.pageSize +
-                        '&pageNumber=' + params.pageNumber,
-                    userAuth)
+                        '&pageNumber=' + params.pageNumber)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -84,10 +82,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function addIssue(userAuth, issueData) {
+            function addIssue(issueData) {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'Issues/', issueData, userAuth)
+                $http.post(BASE_URL + 'Issues/', issueData)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -97,10 +95,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function editIssue(userAuth, issueData) {
+            function editIssue(issueData) {
                 var deferred = $q.defer();
 
-                $http.put(BASE_URL + 'Issues/' + issueData.Id, issueData, userAuth)
+                $http.put(BASE_URL + 'Issues/' + issueData.Id, issueData)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -110,10 +108,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function editIssueStatus(userAuth, issueId, statusId) {
+            function editIssueStatus(issueId, statusId) {
                 var deferred = $q.defer();
 
-                $http.put(BASE_URL + 'Issues/' + issueId + '/changestatus?statusid=' + statusId, {}, userAuth)
+                $http.put(BASE_URL + 'Issues/' + issueId + '/changestatus?statusid=' + statusId, {})
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -123,10 +121,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function getIssueCommentsById(userAuth, id) {
+            function getIssueCommentsById(id) {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Issues/' + id + '/comments', userAuth)
+                $http.get(BASE_URL + 'Issues/' + id + '/comments')
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
@@ -136,10 +134,10 @@ angular.module('issueTrackingSystem.issues.service', [])
                 return deferred.promise;
             }
 
-            function addIssueComment(userAuth, issueId, commentText) {
+            function addIssueComment(issueId, commentText) {
                 var deferred = $q.defer();
 
-                $http.post(BASE_URL + 'Issues/' + issueId + '/comments', commentText, userAuth)
+                $http.post(BASE_URL + 'Issues/' + issueId + '/comments', commentText)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {

@@ -6,10 +6,10 @@ angular.module('issueTrackingSystem.labels.service', [])
         '$q',
         'BASE_URL',
         function ($http, $q, BASE_URL) {
-            function getLabels(userAuth, filter) {
+            function getLabels(filter) {
                 var deferred = $q.defer();
 
-                $http.get(BASE_URL + 'Labels/?filter=' + filter, userAuth)
+                $http.get(BASE_URL + 'Labels/?filter=' + filter)
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {
