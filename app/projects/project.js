@@ -65,7 +65,7 @@ angular.module('issueTrackingSystem.projects', [
                 {
                     type: 'All issues',
                     filter: 'Project.Id == ' + projectId
-                },
+                }
             ];
             $scope.selectedIssueType = $scope.issueTypes[0];
 
@@ -78,6 +78,7 @@ angular.module('issueTrackingSystem.projects', [
             $scope.updateIssues = function () {
                 $scope.filteredIssues = [];
                 $scope.issuesParams.filter = $scope.selectedIssueType.filter;
+                $scope.issuesParams.pageNumber = $scope.currentPage;
 
                 issueService.getIssuesByFilter($scope.issuesParams)
                     .then(function (response) {

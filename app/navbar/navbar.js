@@ -8,8 +8,8 @@ angular.module('issueTrackingSystem.navbar', [
         '$window',
         'authentication',
         function($scope, $window, authentication) {
-            $scope.show = !!localStorage.access_token;
-            $scope.username = localStorage.username;
+            $scope.show = authentication.isLoggedIn();
+            $scope.username = authentication.getUsername();
             $scope.isAdmin = authentication.isAdmin();
             $scope.showMinMenu = false;
         }]);

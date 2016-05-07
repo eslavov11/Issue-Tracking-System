@@ -48,30 +48,9 @@ angular.module('issueTrackingSystem.dashboard', [
                 $location.path("issues/" + id);
             };
 
-            var issuesParams = {
-                pageSize: 5,
-                pageNumber: 1,
-                orderBy: 'DueDate desc'
-            }, projectsParams = {
-                pageSize: 5,
-                pageNumber: 1,
+            var projectsParams = {
                 leadId: authentication.getUserId()
             };
-
-            issueService.getUserIssues(issuesParams)
-                .then(function (issues) {
-                    var issueProjects = [];
-
-                    issues.data.Issues.forEach(function (issue) {
-                        if (!checkForDuplicates(issue.Project.Name, issueProjects)) {
-                            issueProjects.push(issue.Project);
-                        }
-                    });
-
-                    $scope.issueProjects = issueProjects;
-                }, function (error) {
-                    console.log(error);
-                });
 
             projectService.getProjectsForUser(projectsParams)
                 .then(function (response) {
@@ -107,6 +86,15 @@ angular.module('issueTrackingSystem.dashboard', [
                     .then(function (response) {
                         $scope.filteredIssues = response.data.Issues;
                         $scope.issuesCount = response.data.TotalCount;
+
+                        var issueProjects = [];
+                        response.data.Issues.forEach(function (issue) {
+                            if (!checkForDuplicates(issue.Project.Name, issueProjects)) {
+                                issueProjects.push(issue.Project);
+                            }
+                        });
+
+                        $scope.issueProjects = issueProjects;
                     }, function (error) {
                         console.log(error);
                     })

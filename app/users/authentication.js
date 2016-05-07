@@ -87,7 +87,13 @@ angular.module('issueTrackingSystem.users.authentication', [])
 
                 $http.post(BASE_URL + 'api/Account/Logout',{})
                     .then(function (success) {
+                        delete localStorage.access_token;
+                        delete localStorage.username;
+                        delete localStorage.userId;
+                        delete localStorage.isAdmin;
                         delete $http.defaults.headers.common.Authorization;
+
+                        localStorage.userIsLoggingOut = true;
                         deferred.resolve(success);
                     }, function (error) {
                         deferred.reject(error);

@@ -25,10 +25,8 @@ angular.module('issueTrackingSystem.projects.service', [])
                 $http.get(BASE_URL +
                     'Projects/?filter=Lead.Id=\"' +
                     params.leadId +
-                    '\"&pageSize=' +
-                    params.pageSize +
-                    '&pageNumber=' +
-                    params.pageNumber)
+                    '\"&pageSize=1000' +
+                    '&pageNumber=1')
                     .then(function (success) {
                         deferred.resolve(success);
                     }, function (error) {

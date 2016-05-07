@@ -36,11 +36,9 @@
     body > div:nth-child(1) > div > div > div.navbar-header {
         border-bottom: none;
     }
-}
-/******************************/
+    /******************************/
 
-/*****DASHBOARD*******/
-@media only screen and (max-width: 767px) {
+    /*****DASHBOARD*******/
     #wrapper main {
         width: 100%;
     }
@@ -57,11 +55,14 @@
     #associated-projects {
         margin-left: 27%;
     }
-}
-/*********************/
+    /*********************/
 
-/*FOOTER*/
-#app-footer {
-    width: 100%;
+    #edit-issue,
+    #edit-issue-wrapper aside {
+        width: 100%;
+    }
+
+    #app-footer {
+        width: 100%;
+    }
 }
-/*********/

@@ -1,24 +1,24 @@
 'use strict';
 
 angular.module('issueTrackingSystem', [
-  'ui.bootstrap',
-  'ngRoute',
-  'ngResource',
-  'issueTrackingSystem.directives.focusElement',
-  'issueTrackingSystem.navbar',
-  'issueTrackingSystem.home',
-  'issueTrackingSystem.dashboard',
-  'issueTrackingSystem.users.logout',
-  'issueTrackingSystem.users.authentication',
-  'issueTrackingSystem.users.passwordChange',
-  'issueTrackingSystem.projects',
-  'issueTrackingSystem.projects.allProjects',
-  'issueTrackingSystem.projects.addProject',
-  'issueTrackingSystem.projects.editProject',
-  'issueTrackingSystem.issues',
-  'issueTrackingSystem.issues.addIssue',
-  'issueTrackingSystem.issues.editIssue'
-])
+        'ui.bootstrap',
+        'ngRoute',
+        'ngResource',
+        'issueTrackingSystem.directives.focusElement',
+        'issueTrackingSystem.navbar',
+        'issueTrackingSystem.home',
+        'issueTrackingSystem.dashboard',
+        'issueTrackingSystem.users.logout',
+        'issueTrackingSystem.users.authentication',
+        'issueTrackingSystem.users.passwordChange',
+        'issueTrackingSystem.projects',
+        'issueTrackingSystem.projects.allProjects',
+        'issueTrackingSystem.projects.addProject',
+        'issueTrackingSystem.projects.editProject',
+        'issueTrackingSystem.issues',
+        'issueTrackingSystem.issues.addIssue',
+        'issueTrackingSystem.issues.editIssue'
+    ])
     .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push(['$q', 'toastr', function ($q, toastr) {
             toastr.options = {
@@ -120,9 +120,9 @@ angular.module('issueTrackingSystem', [
             }
         });
 
-       $routeProvider.otherwise({
-           redirectTo: '/'
-       });
+        $routeProvider.otherwise({
+            redirectTo: '/'
+        });
     }])
 
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
@@ -134,8 +134,10 @@ angular.module('issueTrackingSystem', [
         $rootScope.$on('$routeChangeStart', function (event, next) {
             if (!authentication.isLoggedIn() && next.access.requiresLogin) {
                 $location.path('/');
+                window.location.reload();
             } else if (!authentication.isAdmin() && next.access.requiresAdmin) {
                 $location.path('/');
+                window.location.reload();
             }
         });
     });

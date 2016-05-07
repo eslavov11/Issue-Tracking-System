@@ -209,6 +209,7 @@ form#change-password button {
 #edit-issue {
   display: inline-block;
   margin: 0 auto;
+  width: 59%;
 }
 
  aside {
