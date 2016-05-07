@@ -29,6 +29,7 @@
 
     <section id="project-issues">
         <h3>Issues</h3>
+
         <table class="table">
             <tr>
                 <th>
@@ -57,6 +58,10 @@
                 max-size="maxSize"
                 boundary-links="true">
         </pagination>
+
+        <select id="select-issue-type" ng-model="selectedIssueType" data-ng-options="issueType.type for issueType in issueTypes"
+                ng-change="updateIssues()" class="form-control">
+        </select>
     </section>
 </main>
 

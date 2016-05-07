@@ -91,6 +91,13 @@ form#change-password button {
   width: 40%;
   float: right;
 }
+
+#select-issue-type {
+  display: inline-block;
+  width: 30%;
+  float: right;
+  margin-top: 20px;;
+}
 /***********************/
 
 /****ADD-PROJECT TMPL***/
@@ -265,7 +272,7 @@ form#change-password button {
 }
 
 .table-column:hover {
-  color: #eee;
+  color: #337ab7;
   text-decoration: underline;
 }
 

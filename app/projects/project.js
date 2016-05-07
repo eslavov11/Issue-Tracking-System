@@ -42,22 +42,53 @@ angular.module('issueTrackingSystem.projects', [
 
             $scope.filteredIssues = [];
             $scope.currentPage = 1;
-            $scope.numPerPage = 2;
-            $scope.maxSize = 5;
+            $scope.numPerPage = 5;
+            $scope.maxSize = 2;
             $scope.issuesCount = 0;
-            $scope.$watch("currentPage + numPerPage", function() {
-                var issuesParams = {
-                    pageSize: $scope.numPerPage,
-                    pageNumber: $scope.currentPage,
+            $scope.issueTypes = [
+                {
+                    type: 'My issues',
                     filter: 'Project.Id == ' + projectId + ' and Assignee.Username == \"' + authentication.getUsername() + '\"'
-                };
+                },
+                {
+                    type: 'Opened issues',
+                    filter: 'Project.Id == ' + projectId + ' and Status.Name == \"Open\"'
+                },
+                {
+                    type: 'In progress',
+                    filter: 'Project.Id == ' + projectId + ' and Status.Name == \"InProgress\"'
+                },
+                {
+                    type: 'Closed issues',
+                    filter: 'Project.Id == ' + projectId + ' and Status.Name == \"Closed\"'
+                },
+                {
+                    type: 'All issues',
+                    filter: 'Project.Id == ' + projectId
+                },
+            ];
+            $scope.selectedIssueType = $scope.issueTypes[0];
 
-                issueService.getIssuesByFilter(issuesParams)
+            $scope.issuesParams = {
+                pageSize: $scope.numPerPage,
+                pageNumber: $scope.currentPage,
+                filter: $scope.selectedIssueType.filter
+            };
+
+            $scope.updateIssues = function () {
+                $scope.filteredIssues = [];
+                $scope.issuesParams.filter = $scope.selectedIssueType.filter;
+
+                issueService.getIssuesByFilter($scope.issuesParams)
                     .then(function (response) {
                         $scope.filteredIssues = response.data.Issues;
                         $scope.issuesCount = response.data.TotalCount;
                     }, function (error) {
                         console.log(error);
                     })
+            };
+
+            $scope.$watch("currentPage + numPerPage", function() {
+                $scope.updateIssues();
             });
         }]);

@@ -31,7 +31,6 @@ angular.module('issueTrackingSystem.issues', [
             issueService.getIssueCommentsById(issueId)
                 .then(function (response) {
                     $scope.comments = response.data;
-                    console.log($scope.comments);
                 }, function (error) {
                     console.log(error);
                 });
