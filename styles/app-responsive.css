@@ -38,3 +38,30 @@
     }
 }
 /******************************/
+
+/*****DASHBOARD*******/
+@media only screen and (max-width: 767px) {
+    #wrapper main {
+        width: 100%;
+    }
+
+    #wrapper main section {
+        width: 100%;
+    }
+
+    #user-issues > ul {
+        float: left;
+        margin-top: 15px;
+    }
+
+    #associated-projects {
+        margin-left: 27%;
+    }
+}
+/*********************/
+
+/*FOOTER*/
+#app-footer {
+    width: 100%;
+}
+/*********/

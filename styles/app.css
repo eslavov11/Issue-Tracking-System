@@ -338,6 +338,8 @@ html,body{
   left: 0;
   right: 0;
   height:20px;
+  width: 85%;
+  margin: 0 auto;
   /*background:#ccc;*/
 }
 /*****************/
