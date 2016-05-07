@@ -323,6 +323,7 @@ html{
   position:relative;
   min-height: 100%;
 }
+
 /*Normalize html and body elements,this style is just good to have*/
 html,body{
   margin:0;
@@ -354,6 +355,20 @@ html,body{
 /********************/
 
 /*NAVBAR-MENU******/
+body > div:nth-child(1) > div > div > div.navbar-header > a {
+  color: #bbb;
+}
+
+body > div:nth-child(1) > div > div > div.navbar-header > a:hover {
+  color: #bbb;
+  cursor: default;
+}
+
+#navbar-main > ul > li a {
+  font-weight: 300;
+  color: #bbb;
+}
+
 #navbar-main > ul > li :hover {
   font-weight: 700;
   background: #337ab7;

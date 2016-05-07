@@ -14,7 +14,8 @@ angular.module('issueTrackingSystem.issues.addIssue', [
         'projectService',
         'issueService',
         'labelService',
-        function($scope, $location, authentication, projectService, issueService, labelService) {
+        'toastr',
+        function($scope, $location, authentication, projectService, issueService, labelService, toastr) {
             authentication.getAllUsers()
                 .then(function (users) {
                     $scope.users = users.data.sort(function(a, b) {
@@ -130,12 +131,10 @@ angular.module('issueTrackingSystem.issues.addIssue', [
                 var data = $scope.issueData || {};
 
                 if (!data.Project) {
-                    //TODO: NOTY
-                    alert('Please select a project');
+                    toastr.error('Please select a project');
                     return false;
                 } else if (!data.Priority) {
-                    //TODO: NOTY
-                    alert('Please select priority');
+                    toastr.error('Please select priority');
                     return false;
                 } else if (!data.Assignee ||
                     !data.LabelsText ||
