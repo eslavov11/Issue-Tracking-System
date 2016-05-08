@@ -59,7 +59,8 @@
                 boundary-links="true">
         </pagination>
 
-        <select id="select-issue-type" ng-model="selectedIssueType" data-ng-options="issueType.type for issueType in issueTypes"
+        <select id="select-issue-type" ng-model="selectedIssueType"
+		data-ng-options="issueType.type for issueType in issueTypes"
                 ng-change="updateIssues()" class="form-control">
         </select>
     </section>

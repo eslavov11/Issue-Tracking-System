@@ -2,7 +2,8 @@
     <h1>Edit project</h1>
 
     <label for="name">Project name</label>
-    <input ng-model="projectData.Name" id="name" type="text" class="form-control" placeholder="Project name..." required>
+    <input ng-model="projectData.Name" id="name" type="text" class="form-control" 
+	placeholder="Project name..." required>
 
     <label for="description">Description</label>
     <textarea ng-model="projectData.Description" name="" id="description" class="form-control"
@@ -11,7 +12,8 @@
 
     <label for="select-leader">Select leader</label>
     <div>
-        <select id="select-leader" ng-disabled="!isAdmin" ng-model="projectData.Leader" data-ng-options="u.Username for u in users"
+        <select id="select-leader" ng-disabled="!isAdmin" ng-model="projectData.Leader" 
+		data-ng-options="u.Username for u in users"
                 class="form-control" required>
         </select>
     </div>
@@ -21,7 +23,8 @@
            placeholder="List project priorities..." required>
 
     <label for="proj-labels">Labels (Comma separated)</label>
-    <input ng-model="projectData.Labels" id="proj-labels" type="text" class="form-control" placeholder="Give project label..." required>
+    <input ng-model="projectData.Labels" id="proj-labels" type="text" class="form-control" 
+	placeholder="Give project label..." required>
 
     <button class="btn btn-primary" ng-click="editProject()">Save project</button>
     <input class="btn btn-primary"  type="reset" value="Reset values">

@@ -31,8 +31,6 @@
     //border-bottom: 1px solid #ccc;
     }
 
-
-
     body > div:nth-child(1) > div > div > div.navbar-header {
         border-bottom: none;
     }
@@ -57,12 +55,16 @@
     }
     /*********************/
 
+	/****Edit-issue*******/
     #edit-issue,
     #edit-issue-wrapper aside {
         width: 100%;
     }
+	/********************/
 
+	/****FOOTER*******/
     #app-footer {
         width: 100%;
     }
+	/***************/
 }
